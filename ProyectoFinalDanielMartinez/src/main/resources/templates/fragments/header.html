@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	  
+	</head>
+
+	<header class="header fixed-top" th:fragment="cabeza">
+	        <nav class="navbar navbar-expand-sm navbar-dark bg-danger position-relative">
+	            <div class="container-fluid">
+	                <a class="navbar-brand position-absolute top-0" href="../html/index.html" style="z-index: 1;">
+	                    <img src="../../static/img/icono.png" th:src="@{/img/icono.png}" alt="logo">
+	                </a>
+	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+	                    <span class="navbar-toggler-icon"></span>
+	                </button>
+	                <div class="collapse navbar-collapse" id="mynavbar">
+	                    <ul class="navbar-nav d-flex align-items-center ms-auto">
+	                        <li class="nav-item dropdown" onmouseover="showDropdown(this)" onmouseout="hideDropdown(this)">
+	                            <a class="nav-link text-white dropdown-toggle" href="./juegos.html" id="navbarDropdownArmas" role="button" aria-expanded="false">
+	                                <img src="../../static/img/espadas.png" th:src="@{/img/espadas.png}" alt="Armas" class="me-1">
+	                                Armas
+	                            </a>
+	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownArmas">
+	                                <li><a class="dropdown-item" href="#">Melee</a></li>
+	                                <li><a class="dropdown-item" href="#">Distancia</a></li>
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item dropdown" onmouseover="showDropdown(this)" onmouseout="hideDropdown(this)">
+	                            <a class="nav-link text-white dropdown-toggle" href="./faq.html" id="navbarDropdownArmaduras" role="button" aria-expanded="false">
+	                                <img src="../../static/img/casco.png" th:src="@{/img/casco.png}" alt="Armaduras" class="me-1">
+	                                Armaduras
+	                            </a>
+	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownArmaduras">
+	                                <li><a class="dropdown-item" href="#">Metal</a></li>
+	                                <li><a class="dropdown-item" href="#">Cuero</a></li>
+	                            </ul>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link text-white" href="./envios.html">
+	                                <img src="../../static/img/cuerno.png" th:src="@{/img/cuerno.png}" alt="Otros" class="me-1">
+	                                Otros
+	                            </a>
+	                        </li>
+	                    </ul>
+	                    
+	                    <form class="d-flex mx-auto">
+	                        <input class="form-control me-2" type="text" placeholder="Buscar">
+	                        <button class="btn btn-primary" type="button">Buscar</button>
+	                    </form>
+	                    <button id="btnOscuro" type="button" class="btn btn-dark"><i class="bi bi-circle-half"></i></button>
+	                    <button class="btn btn-light ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLoginForm">LOGIN</button>
+	                    <a class="btn btn-light ms-2" href="./carro.html"><i class="bi bi-cart"></i></a>
+	                </div>
+	            </div>
+	        </nav>
+	        
+	        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLoginForm" aria-labelledby="offcanvasLoginFormLabel">
+	            <div class="offcanvas-header">
+	                <h5 class="offcanvas-title" id="offcanvasLoginFormLabel">Inicio de sesión</h5>
+	                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	            </div>
+	            <div class="offcanvas-body">
+	                <form>
+	                    <div class="mb-3">
+	                        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+	                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+	                    </div>
+	                    <div class="mb-3">
+	                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+	                        <input type="password" class="form-control" id="exampleInputPassword1">
+	                    </div>
+	                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+	                    <p class="mt-2">¿No estás registrado aún? <a href="./registro.html">Regístrate</a></p>
+	                    <p class="mt-2">--------------------------- O ---------------------------</p>
+	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-danger bi bi-google"></i> Iniciar con Google</a>
+	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-primary bi bi-facebook"></i> Iniciar con Facebook</a>
+	                </form>
+	            </div>
+	        </div>
+	    </header>
+	
+</html>
