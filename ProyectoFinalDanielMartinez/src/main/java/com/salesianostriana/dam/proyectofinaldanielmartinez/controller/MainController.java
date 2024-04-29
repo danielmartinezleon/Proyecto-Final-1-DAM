@@ -12,9 +12,20 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/indexuser")
+	public String indexuser() {
+		return "indexuser";
+	}
+	
 	@GetMapping("/melee")
 	public String melee() {
 		return "melee";
+		
+	}
+	
+	@GetMapping("/meleeuser")
+	public String meleeuser() {
+		return "meleeuser";
 		
 	}
 	
@@ -23,4 +34,36 @@ public class MainController {
 		return "producto";
 		
 	}
+	
+	@GetMapping("/productouser")
+	public String productouser() {
+		return "productouser";
+		
+	}
+	
+	@GetMapping("/cuero")
+	public String cuero() {
+		return "cuero";
+		
+	}
+	
+	@GetMapping("/cuerouser")
+	public String cuerouser() {
+		return "cuerouser";
+		
+	}
+	
+	@GetMapping("/armadura1")
+	public String armadura1() {
+		return "armadura1";
+		
+	}
+	
+	@GetMapping("/armadura1user")
+	public String armadura1user() {
+		return "armadura1user";
+		
+	}
+	
+	
 }
