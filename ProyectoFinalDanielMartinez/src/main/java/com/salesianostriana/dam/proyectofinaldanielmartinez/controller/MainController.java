@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.controller;
+package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,15 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/otra")
-	public String otra(Model model) {
-		model.addAttribute("mensaje", "Otra cadena");
-		return "otrapagina";
+	@GetMapping("/melee")
+	public String melee() {
+		return "melee";
+		
+	}
+	
+	@GetMapping("/producto")
+	public String producto() {
+		return "producto";
 		
 	}
 }
