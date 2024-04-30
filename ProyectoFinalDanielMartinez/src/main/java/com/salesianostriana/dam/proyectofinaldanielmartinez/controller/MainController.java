@@ -17,9 +17,20 @@ public class MainController {
 		return "indexuser";
 	}
 	
+	@GetMapping("/indexadmin")
+	public String indexadmin() {
+		return "indexadmin";
+	}
+	
 	@GetMapping("/melee")
 	public String melee() {
 		return "melee";
+		
+	}
+	
+	@GetMapping("/meleeadmin")
+	public String meleeadmin() {
+		return "meleeadmin";
 		
 	}
 	
