@@ -53,6 +53,12 @@ public class MainController {
 		
 	}
 	
+	@GetMapping("/cueroadmin")
+	public String cueroadmin() {
+		return "cueroadmin";
+		
+	}
+	
 	@GetMapping("/armadura1")
 	public String armadura1() {
 		return "armadura1";
