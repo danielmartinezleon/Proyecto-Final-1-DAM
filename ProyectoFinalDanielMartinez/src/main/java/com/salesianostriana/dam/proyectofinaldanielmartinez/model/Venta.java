@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Venta {
 
+	@Id
+	@GeneratedValue
 	private Long id;
 	
 	private LocalDate fecha;
@@ -26,5 +30,5 @@ public class Venta {
 	
 	@ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_admin_venta"))
-	private Admin Admin;
+	private Admin admin;
 }

@@ -15,7 +15,7 @@ import lombok.Data;
 @DiscriminatorValue("C")
 public class Cliente extends Usuario{
 
-	@OneToMany(mappedBy = "ventas", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
 	
 	public Cliente(String nombre, String apellidos, String email, String password, String direccion) {

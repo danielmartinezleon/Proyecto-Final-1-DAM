@@ -9,20 +9,22 @@
                 <div class="col-md-9">
                     <h3 class="mt-5 text-center">ARMAS A MELEE</h3>
                     <div class="text-center">
+                        <!-- Botón para agregar producto -->
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
                             <i class="bi bi-bag-plus-fill"></i>
                             Agregar Producto
-                           </button>
+                        </button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
-                        <div class="col">
+                        <!-- Iterar sobre los productos y mostrarlos -->
+                        <div th:each="producto : ${productos}" class="col">
                             <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
+                                <a th:href="@{/producto/{id}(id=${producto.id})}">
+                                    <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="juego-dos">
                                 </a>
                                 <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
+                                    <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                                    <p class="precio" th:text="'€' + ${producto.precio}"></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <button class="btn btn-primary">Editar</button>
                                         <button class="btn btn-danger">Eliminar</button>
@@ -30,207 +32,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/armadura1user}">
-                                    <img src="https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg" th:src="@{https://mortisdraco.com/wp-content/uploads/2019/11/442527.jpg}" class="card-img-top img-fluid" alt="juego-dos">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">Espada Aether Dao – Lila – 100 cm</h5>
-                                    <p class="precio">130,00€</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
                 </div>
                 <div class="col-md-3">
                     <!-- Aside para filtrado -->
                     <aside>
                         <div class="container">
                             <h5>Filtrar:</h5>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="orden">Ordenar por:</label>
-                                    <select class="form-select" id="orden">
-                                        <option value="nombre_asc">Nombre A-Z</option>
-                                        <option value="precio_bajo">Precio más bajo primero</option>
-                                        <option value="precio_alto">Precio más alto primero</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rango">Filtrar por precio:</label>
-                                    <input type="range" class="form-range" id="rango" value="0" min="0" max="400" step="1">
-                                    <span id="valor_rango">0</span>
-                                </div>
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary">Aplicar filtro</button>
-                                </div>
-                            </form>
+                            <!-- Aquí va el formulario de filtrado -->
                         </div>
                     </aside>
-                    <!-- Botón para agregar producto -->
                 </div>
             </div>
         </div>
@@ -273,15 +84,17 @@
             </div>
         </div>
     </div>
-</body>
-<script>
-    let rango = document.getElementById('rango');
-    let valorSpan = document.getElementById('valor_rango');
 
-    function actualizarValor() {
-        valorSpan.textContent = rango.value;
-    }
-    rango.addEventListener('input', actualizarValor);
-    actualizarValor();
-</script>
+    <!-- Script para actualizar el valor del rango -->
+    <script>
+        let rango = document.getElementById('rango');
+        let valorSpan = document.getElementById('valor_rango');
+
+        function actualizarValor() {
+            valorSpan.textContent = rango.value;
+        }
+        rango.addEventListener('input', actualizarValor);
+        actualizarValor();
+    </script>
+</body>
 </html>

@@ -12,7 +12,7 @@ import jakarta.persistence.OneToMany;
 @DiscriminatorValue("A")
 public class Admin extends Usuario {
 
-	@OneToMany(mappedBy = "ventas", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "admin", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
 	
 	public Admin(String nombre, String apellidos, String email, String password, String direccion) {

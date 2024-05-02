@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.service.base;
+package com.salesianostriana.dam.proyectofinaldanielmartinez.service.base;
 
 import java.util.List;
 import java.util.Optional;
