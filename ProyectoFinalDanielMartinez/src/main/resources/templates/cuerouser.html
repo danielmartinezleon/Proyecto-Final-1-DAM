@@ -175,7 +175,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="rango">Filtrar por precio:</label>
-                                    <input type="range" class="form-range" id="rango">
+                                    <input type="range" class="form-range" id="rango" value="0" min="0" max="400" step="1">
+                                    <span id="valor_rango">0</span>
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Aplicar filtro</button>
@@ -189,4 +190,14 @@
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
 </body>
+<script>
+    let rango = document.getElementById('rango');
+    let valorSpan = document.getElementById('valor_rango');
+
+    function actualizarValor() {
+        valorSpan.textContent = rango.value;
+    }
+    rango.addEventListener('input', actualizarValor);
+    actualizarValor();
+</script>
 </html>
