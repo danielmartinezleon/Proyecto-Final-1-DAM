@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 
@@ -26,4 +30,15 @@ public class AdminController {
         return "meleeadmin";
     }
     
+    @PostMapping("/admin/guardarProducto")
+    public String guardarProducto(@ModelAttribute Producto producto) {
+    	productoService.save(producto);
+        return "redirect:/admin/productos";
+    }
+   
+    @PostMapping("/admin/eliminarProducto/{id}")
+    public String eliminarProducto(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos";
+    }
 }
