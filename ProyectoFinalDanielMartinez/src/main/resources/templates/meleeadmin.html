@@ -10,7 +10,7 @@
                     <h3 class="mt-5 text-center">ARMAS A MELEE</h3>
                     <div class="text-center">
 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
-						    <i class="bi bi-plus"></i> Agregar Producto
+							<i class="bi bi-bag-plus-fill"></i> Agregar Producto
 						</button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
@@ -22,13 +22,22 @@
                                 <div class="card-body">
                                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                                     <p class="precio" th:text="${#numbers.formatDecimal(producto.precio, 001, 2)} + '€'"></p>
-                                    <button class="btn btn-success">Añadir a mi cesta</button>
+									<div class="btn-group" role="group">
+                                        <form th:action="@{/eliminarProducto/{id}(id=${producto.id})}" method="post">
+                                            <input type="hidden" name="_method" value="POST" />
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                        <form action="#">
+                                            <input type="hidden" name="_method" value="#" />
+                                            <button type="submit" class="btn btn-primary">Editar</button>
+                                        </form>
+									</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                </div>
+                	</div>
                 <div class="col-md-3">
                     <!-- Aside para filtrado -->
                     <aside>
@@ -70,7 +79,7 @@
                 </div>
                 <div class="modal-body">
                     
-                <form th:action="guardarProducto" method="post" th:object="${producto}">
+                <form th:action="@{/guardarProducto}" method="post" th:object="${producto}">
                     <div class="mb-3">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del producto">

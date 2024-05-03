@@ -40,10 +40,16 @@ public class ProductoController {
         return "producto";
     }
     
-    @PostMapping("/admin/guardarProducto")
+    @PostMapping("/guardarProducto")
     public String guardarProducto(@ModelAttribute Producto producto) {
-        productoService.save(producto);
-        return "redirect:/productos";
+    	productoService.save(producto);
+        return "redirect:/admin/productos";
+    }
+   
+    @PostMapping("/eliminarProducto/{id}")
+    public String eliminarProducto(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos";
     }
 
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 
@@ -23,6 +22,7 @@ public class AdminController {
     public String listarProductosAdmin(Model model) {
         List<Producto> productos = productoService.findAll();
         model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
         return "meleeadmin";
     }
     
