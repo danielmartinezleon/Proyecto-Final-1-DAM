@@ -25,4 +25,5 @@ public class AdminController {
         model.addAttribute("productos", productos);
         return "meleeadmin";
     }
+    
 }

@@ -9,37 +9,49 @@
                 <div class="col-md-9">
                     <h3 class="mt-5 text-center">ARMAS A MELEE</h3>
                     <div class="text-center">
-                        <!-- Botón para agregar producto -->
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
-                            <i class="bi bi-bag-plus-fill"></i>
-                            Agregar Producto
-                        </button>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
+						    <i class="bi bi-plus"></i> Agregar Producto
+						</button>
                     </div>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
-                        <!-- Iterar sobre los productos y mostrarlos -->
-                        <div th:each="producto : ${productos}" class="col">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+                        <div th:each="producto : ${productos}" class="col-md-3">
                             <div class="card my-3 bg-light bg-light">
-                                <a th:href="@{/producto/{id}(id=${producto.id})}">
+                                <a th:href="${'/producto/'+producto.id}">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="juego-dos">
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
-                                    <p class="precio" th:text="'€' + ${producto.precio}"></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-primary">Editar</button>
-                                        <button class="btn btn-danger">Eliminar</button>
-                                    </div>
+                                    <p class="precio" th:text="${#numbers.formatDecimal(producto.precio, 001, 2)} + '€'"></p>
+                                    <button class="btn btn-success">Añadir a mi cesta</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="col-md-3">
                     <!-- Aside para filtrado -->
                     <aside>
                         <div class="container">
                             <h5>Filtrar:</h5>
-                            <!-- Aquí va el formulario de filtrado -->
+                            <form>
+                                <div class="mb-3">
+                                    <label for="orden">Ordenar por:</label>
+                                    <select class="form-select" id="orden">
+                                        <option value="nombre_asc">Nombre A-Z</option>
+                                        <option value="precio_bajo">Precio más bajo primero</option>
+                                        <option value="precio_alto">Precio más alto primero</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rango">Filtrar por precio:</label>
+                                    <input type="range" class="form-range" id="rango" value="0" min="0" max="400" step="1">
+                                    <span id="valor_rango">0</span>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Aplicar filtro</button>
+                                </div>
+                            </form>
                         </div>
                     </aside>
                 </div>
@@ -57,44 +69,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Formulario para agregar producto -->
-                    <form>
-                        <div class="mb-3">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del producto">
-                        </div>
-                        <div class="mb-3">
-                            <label for="descripcion">Descripción:</label>
-                            <textarea class="form-control" id="descripcion" rows="3" placeholder="Ingrese una descripción del producto"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="stock">Stock:</label>
-                            <input type="number" class="form-control" id="stock" placeholder="Ingrese el stock disponible">
-                        </div>
-                        <div class="mb-3">
-                            <label for="imagen">Imagen (URL):</label>
-                            <input type="text" class="form-control" id="imagen" placeholder="Ingrese la URL de la imagen">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                        </div>
-                    </form>
+                    
+                <form th:action="guardarProducto" method="post" th:object="${producto}">
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" th:field="*{descripcion}" rows="3" placeholder="Ingrese una descripción del producto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock">Stock:</label>
+                        <input type="number" class="form-control" id="stock" name="stock" th:field="*{stock}" placeholder="Ingrese el stock disponible">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio">Precio:</label>
+                        <input type="text" class="form-control" id="precio" name="precio" th:field="*{precio}" placeholder="Ingrese el precio del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen">Imagen (URL):</label>
+                        <input type="text" class="form-control" id="imagen" name="imagen" th:field="*{imagen}" placeholder="Ingrese la URL de la imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                    </div>
+                </form>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Script para actualizar el valor del rango -->
-    <script>
-        let rango = document.getElementById('rango');
-        let valorSpan = document.getElementById('valor_rango');
-
-        function actualizarValor() {
-            valorSpan.textContent = rango.value;
-        }
-        rango.addEventListener('input', actualizarValor);
-        actualizarValor();
-    </script>
 </body>
+<script>
+    let rango = document.getElementById('rango');
+    let valorSpan = document.getElementById('valor_rango');
+
+    function actualizarValor() {
+        valorSpan.textContent = rango.value;
+    }
+    rango.addEventListener('input', actualizarValor);
+    actualizarValor();
+</script>
 </html>
