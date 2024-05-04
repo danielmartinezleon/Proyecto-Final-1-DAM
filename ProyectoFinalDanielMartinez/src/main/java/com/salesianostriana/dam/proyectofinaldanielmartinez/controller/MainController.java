@@ -22,11 +22,11 @@ public class MainController {
 		return "indexadmin";
 	}
 	
-	/*@GetMapping("/melee")
+	@GetMapping("/melee")
 	public String melee() {
 		return "melee";
 		
-	}*/
+	}
 	
 	
 	@GetMapping("/meleeuser")
