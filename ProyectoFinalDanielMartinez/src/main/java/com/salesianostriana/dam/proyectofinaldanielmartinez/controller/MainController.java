@@ -28,11 +28,6 @@ public class MainController {
 		
 	}*/
 	
-	/*@GetMapping("/meleeadmin")
-	public String meleeadmin() {
-		return "meleeadmin";
-		
-	}*/
 	
 	@GetMapping("/meleeuser")
 	public String meleeuser() {
