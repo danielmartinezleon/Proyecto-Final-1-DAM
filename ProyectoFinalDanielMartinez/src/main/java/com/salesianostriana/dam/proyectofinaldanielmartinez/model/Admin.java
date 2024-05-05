@@ -14,11 +14,12 @@ public class Admin extends Usuario {
 
 	@OneToMany(mappedBy = "admin", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
-	
-	public Admin(String nombre, String apellidos, String email, String password, String direccion) {
-		super(nombre, apellidos, email, password, direccion);
-		
+
+	public Admin(String username, String nombre, String apellidos, String email, String password, String direccion) {
+		super(username, nombre, apellidos, email, password, direccion);
 	}
+	
+	
 
 	
 	

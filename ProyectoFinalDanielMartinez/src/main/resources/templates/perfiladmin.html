@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head::head}"></head>
+<body class="d-flex flex-column vh-100">
+    <header th:replace="~{fragments/headeradmin::cabezaadmin}"></header>
+    <main class="flex-grow-1 d-flex justify-content-center align-items-center" style="margin-top: 56px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <aside class="bg-light p-4">
+                        <h4 class="mb-4">Opciones</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="#">Ver Histórico</a></li>
+                            <li class="list-group-item"><a href="#">Descuentos</a></li>
+                            <li class="list-group-item"><a href="#">Eventos</a></li>
+                            <li class="list-group-item"><a href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-md-9">
+                    <!-- Contenido principal: Datos del usuario -->
+                    <h2 class="mb-4">Mi cuenta</h2>
+                    <div id="userData">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Nombre</th>
+                                <td>Juan</td>
+                            </tr>
+                            <tr>
+                                <th>Apellidos</th>
+                                <td>Pérez García</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>juan@example.com</td>
+                            </tr>
+                            <tr>
+                                <th>Dirección</th>
+                                <td>Calle Principal, 123</td>
+                            </tr>
+                            <tr>
+                                <th>Contraseña</th>
+                                <td>********</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button id="editarPerfilBtn" class="btn btn-primary mb-4">Editar perfil</button>
+                    <!-- Formulario de edición oculto -->
+                    <form id="editarPerfilForm" style="display: none;">
+                        <div class="mb-3">
+                            <label for="nombreEdit">Nombre:</label>
+                            <input type="text" class="form-control" id="nombreEdit" placeholder="Nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidosEdit">Apellidos:</label>
+                            <input type="text" class="form-control" id="apellidosEdit" placeholder="Apellidos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailEdit">Email:</label>
+                            <input type="email" class="form-control" id="emailEdit" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccionEdit">Dirección:</label>
+                            <input type="text" class="form-control" id="direccionEdit" placeholder="Dirección">
+                        </div>
+                        <div class="mb-3">
+                            <label for="passwordEdit">Contraseña:</label>
+                            <input type="password" class="form-control" id="passwordEdit" placeholder="Contraseña">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer::pie}"></footer>
+</body>
+<script>
+    document.getElementById('editarPerfilBtn').addEventListener('click', function() {
+        // Ocultar datos del usuario y mostrar formulario de edición
+        document.getElementById('userData').style.display = 'none';
+        document.getElementById('editarPerfilForm').style.display = 'block';
+    });
+</script>
+</html>

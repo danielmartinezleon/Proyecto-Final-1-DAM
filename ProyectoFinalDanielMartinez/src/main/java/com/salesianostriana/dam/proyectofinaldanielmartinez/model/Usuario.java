@@ -16,19 +16,22 @@ public abstract class Usuario {
 	@GeneratedValue
 	private Long id;
 	
+	private String username;
 	private String nombre;
 	private String apellidos;
 	private String email;
 	private String password;
 	private String direccion;
 	
-	public Usuario(String nombre, String apellidos, String email, String password, String direccion) {
+	public Usuario(String username, String nombre, String apellidos, String email, String password, String direccion) {
+		this.username = username;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
 		this.direccion = direccion;
 	}
+	
 	
 	
 	

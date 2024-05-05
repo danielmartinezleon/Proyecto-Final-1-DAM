@@ -18,8 +18,8 @@ public class Cliente extends Usuario{
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
 	
-	public Cliente(String nombre, String apellidos, String email, String password, String direccion) {
-		super(nombre, apellidos, email, password, direccion);
+	public Cliente(String username, String nombre, String apellidos, String email, String password, String direccion) {
+		super(username, nombre, apellidos, email, password, direccion);
 		
 	}
 

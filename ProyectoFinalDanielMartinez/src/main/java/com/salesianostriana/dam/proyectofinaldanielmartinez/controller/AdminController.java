@@ -22,6 +22,16 @@ public class AdminController {
         this.productoService = productoService;
     }
 
+    @GetMapping("/admin")
+	public String indexadmin() {
+		return "indexadmin";
+	}
+    
+    @GetMapping("/admin/perfil")
+	public String perfiladmin() {
+		return "perfiladmin";
+	}
+    
     @GetMapping("/admin/productos")
     public String listarProductosAdmin(Model model) {
         List<Producto> productos = productoService.findAll();
