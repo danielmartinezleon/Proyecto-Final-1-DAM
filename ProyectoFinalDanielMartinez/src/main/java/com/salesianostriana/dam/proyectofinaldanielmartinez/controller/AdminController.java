@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.ui.Model;
 @Controller
 public class AdminController {
 
-    private final ProductoService productoService;
+    private ProductoService productoService;
 
     public AdminController(ProductoService productoService) {
         this.productoService = productoService;
@@ -43,6 +44,14 @@ public class AdminController {
     @PostMapping("/admin/guardarProducto")
     public String guardarProducto(@ModelAttribute Producto producto) {
     	productoService.save(producto);
+        return "redirect:/admin/productos";
+    }
+
+    @PostMapping("/admin/editarProducto/{id}")
+    public String editarProducto(@PathVariable("id") Long id, @ModelAttribute Producto producto) {
+        if(productoService.findById(id) != null) {
+        	productoService.edit(producto);
+        }
         return "redirect:/admin/productos";
     }
    
