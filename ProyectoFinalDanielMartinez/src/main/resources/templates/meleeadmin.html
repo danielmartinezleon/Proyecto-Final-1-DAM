@@ -79,7 +79,8 @@
                 </div>
                 <div class="modal-body">
                     
-                <form th:action="@{/admin/guardarProducto}" method="post" th:object="${producto}">
+                <form th:action="${producto.id != 0} ? @{/admin/editarProducto} : @{/admin/guardarProducto}" th:object="${producto}" method="post">
+                
                     <div class="mb-3">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del producto">

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
@@ -48,6 +47,13 @@ public class AdminController {
         return "redirect:/admin/productos";
     }
 
+    @PostMapping("/admin/editarProducto/{id}")
+    public String editarProducto(@PathVariable("id") Long id, @ModelAttribute Producto producto) {
+        if(productoService.findById(id) != null) {
+        	productoService.edit(producto);
+        }
+        return "redirect:/admin/productos";
+    }
    
     @PostMapping("/admin/eliminarProducto/{id}")
     public String eliminarProducto(@PathVariable("id") Long id) {
