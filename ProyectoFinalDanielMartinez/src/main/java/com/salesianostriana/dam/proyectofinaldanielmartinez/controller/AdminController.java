@@ -1,12 +1,14 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
@@ -16,7 +18,7 @@ import org.springframework.ui.Model;
 @Controller
 public class AdminController {
 
-    private final ProductoService productoService;
+    private ProductoService productoService;
 
     public AdminController(ProductoService productoService) {
         this.productoService = productoService;
@@ -45,6 +47,7 @@ public class AdminController {
     	productoService.save(producto);
         return "redirect:/admin/productos";
     }
+
    
     @PostMapping("/admin/eliminarProducto/{id}")
     public String eliminarProducto(@PathVariable("id") Long id) {
