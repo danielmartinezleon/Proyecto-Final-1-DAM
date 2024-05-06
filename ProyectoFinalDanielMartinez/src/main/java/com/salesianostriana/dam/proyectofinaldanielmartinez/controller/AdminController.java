@@ -47,12 +47,14 @@ public class AdminController {
         return "redirect:/admin/productos";
     }
 
-    @PostMapping("/admin/editarProducto/{id}")
-    public String editarProducto(@PathVariable("id") Long id, @ModelAttribute Producto producto) {
-        if(productoService.findById(id) != null) {
-        	productoService.edit(producto);
+    @GetMapping("/admin/editarProducto/{id}")
+    public String editarProducto(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> productoOptional = productoService.findById(id);
+        if (productoOptional.isPresent()) {
+            Producto producto = productoOptional.get();
+            model.addAttribute("producto", producto);
         }
-        return "redirect:/admin/productos";
+        return "meleeadmin";
     }
    
     @PostMapping("/admin/eliminarProducto/{id}")
