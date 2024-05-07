@@ -59,10 +59,10 @@
 	                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	            </div>
 	            <div class="offcanvas-body">
-	                <form>
+	                <form th:action="@{/index}">
 	                    <div class="mb-3">
-	                        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-	                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+	                        <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
+	                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 	                    </div>
 	                    <div class="mb-3">
 	                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>

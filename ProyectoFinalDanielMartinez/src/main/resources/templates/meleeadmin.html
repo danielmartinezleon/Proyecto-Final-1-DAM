@@ -9,7 +9,7 @@
                 <div class="col-md-9">
                     <h3 class="mt-5 text-center">ARMAS A MELEE</h3>
                     <div class="text-center">
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProductoModal">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
 							<i class="bi bi-bag-plus-fill"></i> Agregar Producto
 						</button>
                     </div>
@@ -27,9 +27,9 @@
                                             <input type="hidden" name="_method" value="POST" />
                                             <button type="submit" class="btn btn-danger">Eliminar</button>
                                         </form>
-										<form th:action="@{/admin/editarProducto/{id}(id=${producto.id})}" method="post">
+										<form>
                                             <input type="hidden" name="_method" value="POST" />
-                                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ProductoModal">Editar</button>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProductoModal">Editar</button>
                                         </form>
 									</div>
                                 </div>
@@ -69,8 +69,8 @@
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
 
-    <!-- Modal para agregar producto -->
-    <div class="modal fade" id="ProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Formulario para agregar producto -->
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,7 +79,7 @@
                 </div>
                 <div class="modal-body">
                     
-                <form th:action="${producto.id != 0} ? @{/admin/editarProducto} : @{/admin/guardarProducto}" th:object="${producto}" method="post">
+                <form th:action="@{/admin/guardarProducto}" th:object="${producto}" method="post">
                 
                     <div class="mb-3">
                         <label for="nombre">Nombre:</label>
@@ -104,6 +104,48 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                <form th:action="@{/admin/editarProducto/{id}(id=${producto.id})}" th:object="${producto}" method="post">
+                
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" th:field="*{descripcion}" rows="3" placeholder="Ingrese una descripción del producto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock">Stock:</label>
+                        <input type="number" class="form-control" id="stock" name="stock" th:field="*{stock}" placeholder="Ingrese el stock disponible">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio">Precio:</label>
+                        <input type="text" class="form-control" id="precio" name="precio" th:field="*{precio}" placeholder="Ingrese el precio del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen">Imagen (URL):</label>
+                        <input type="text" class="form-control" id="imagen" name="imagen" th:field="*{imagen}" placeholder="Ingrese la URL de la imagen">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </div>
                 </form>
 

@@ -3,6 +3,7 @@ package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 @Controller
 public class AdminController {
 
+	@Autowired
     private ProductoService productoService;
 
     public AdminController(ProductoService productoService) {
@@ -47,19 +49,21 @@ public class AdminController {
         return "redirect:/admin/productos";
     }
 
-    @GetMapping("/admin/editarProducto/{id}")
-    public String editarProducto(@PathVariable("id") Long id, Model model) {
-        Optional<Producto> productoOptional = productoService.findById(id);
-        if (productoOptional.isPresent()) {
-            Producto producto = productoOptional.get();
-            model.addAttribute("producto", producto);
-        }
-        return "meleeadmin";
-    }
    
     @PostMapping("/admin/eliminarProducto/{id}")
     public String eliminarProducto(@PathVariable("id") Long id) {
         productoService.deleteById(id);
         return "redirect:/admin/productos";
     }
+    
+    @PostMapping("/admin/editarProducto/{id}")
+    public String editarProducto(@PathVariable("id") Long id, Model model, @ModelAttribute Producto producto) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+        
+        producto = optionalProducto.get();
+        productoService.edit(producto);
+        
+        return "redirect:/admin/productos";
+    }
+
 }
