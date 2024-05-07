@@ -56,14 +56,12 @@ public class AdminController {
         return "redirect:/admin/productos";
     }
     
-    @PostMapping("/admin/editarProducto/{id}")
-    public String editarProducto(@PathVariable("id") Long id, Model model, @ModelAttribute Producto producto) {
-        Optional<Producto> optionalProducto = productoService.findById(id);
-        
-        producto = optionalProducto.get();
+    @PostMapping("/admin/editarProducto")
+    public String editarProducto(@ModelAttribute Producto producto) {
+    	System.out.println("Producto ID: "+producto.getId());
         productoService.edit(producto);
-        
         return "redirect:/admin/productos";
     }
+
 
 }
