@@ -56,11 +56,22 @@ public class AdminController {
         return "redirect:/admin/productos";
     }
     
-    @PostMapping("/admin/editarProducto")
-    public String editarProducto(@ModelAttribute Producto producto) {
-    	System.out.println("Producto ID: "+producto.getId());
-        productoService.edit(producto);
-        return "redirect:/admin/productos";
+    
+    @GetMapping("/editar/{id}")
+	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+		Optional<Producto> prod = productoService.findById(id);
+		
+		Producto editar = prod.get();
+		model.addAttribute("productoEdit", editar);
+		
+		return "formularioprod";
+		
+	}
+    
+    @PostMapping("/editar/submit")
+    public String procesarFormulario(@ModelAttribute("productoEdit") Producto p) {
+    	productoService.edit(p);
+    	return "redirect:/admin/productos";
     }
 
 
