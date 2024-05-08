@@ -26,7 +26,7 @@ public class SecurityConfig {
         		.build();
         return new InMemoryUserDetailsManager(user);
     }
-	
+	/*
 	@Bean 
 	DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -59,5 +59,5 @@ public class SecurityConfig {
 
 		return http.build();
 	}
-
+*/
 }
