@@ -32,6 +32,7 @@ public class SecurityConfig {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService());
 		provider.setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
+		provider.setHideUserNotFoundExceptions(false);
 		return provider;
 	}
 	
@@ -53,9 +54,14 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(
-				(authz) -> authz.anyRequest().authenticated())
+				(authz) -> authz
+				.requestMatchers("/css/**", "/js/**", "/img/**")
+				.permitAll()
+				.anyRequest()
+				.authenticated())
 					.formLogin((loginz) -> loginz
-					.loginPage("/index").permitAll());
+					.loginPage("/").permitAll()
+					.defaultSuccessUrl("/admin", true));
 
 		return http.build();
 	}

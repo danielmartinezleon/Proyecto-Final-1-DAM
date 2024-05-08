@@ -57,7 +57,7 @@ public class AdminController {
     }
     
     @PostMapping("/admin/editarProducto/{id}")
-    public String editarProducto(@PathVariable("id") Long id, Model model, @ModelAttribute Producto producto) {
+    public String editarProducto(@PathVariable("id") Long id, @ModelAttribute Producto producto) {
         Optional<Producto> optionalProducto = productoService.findById(id);
         
         producto = optionalProducto.get();

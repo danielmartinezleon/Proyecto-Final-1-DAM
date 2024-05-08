@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 	  
 	</head>
@@ -59,14 +59,14 @@
 	                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 	            </div>
 	            <div class="offcanvas-body">
-	                <form th:action="@{/index}">
+	                <form th:action="@{/login}">
 	                    <div class="mb-3">
 	                        <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
-	                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+	                        <input type="text" class="form-control" id="username" placeholder="Nombre de usuario" required autofocus>
 	                    </div>
 	                    <div class="mb-3">
 	                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-	                        <input type="password" class="form-control" id="exampleInputPassword1">
+	                        <input type="password" class="form-control" id="password" placeholder="Contraseña">
 	                    </div>
 	                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
 	                    <p class="mt-2">¿No estás registrado aún? <a href="./registro.html">Regístrate</a></p>
