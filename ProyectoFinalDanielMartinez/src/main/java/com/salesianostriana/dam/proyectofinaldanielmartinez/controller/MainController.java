@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 
+
 @Controller
 public class MainController {
 
@@ -17,18 +18,22 @@ public class MainController {
 	private ProductoService productoService;
 	
 	
-	
 	public MainController(ProductoService productoService) {
 		this.productoService = productoService;
 	}
 
 	@GetMapping("/")
-	public String index() {
-		return "index";
+	public String index(Model model) {
+		List<Producto> productos = productoService.seleccionarProductosAleatorios(4);
+		model.addAttribute("productos", productos);
+        return "index";
 	}
 	
+	
 	@GetMapping("/indexuser")
-	public String indexuser() {
+	public String indexuser(Model model) {
+		List<Producto> productos = productoService.seleccionarProductosAleatorios(4);
+		model.addAttribute("productos", productos);
 		return "indexuser";
 	}
 	

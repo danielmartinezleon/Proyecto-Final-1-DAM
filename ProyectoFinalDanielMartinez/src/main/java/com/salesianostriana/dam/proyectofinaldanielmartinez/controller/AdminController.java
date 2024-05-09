@@ -26,7 +26,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-	public String indexadmin() {
+	public String indexadmin(Model model) {
+    	List<Producto> productos = productoService.seleccionarProductosAleatorios(4);
+		model.addAttribute("productos", productos);
 		return "indexadmin";
 	}
     

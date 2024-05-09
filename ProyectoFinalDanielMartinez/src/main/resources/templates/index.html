@@ -50,6 +50,23 @@
             <p class="lead text-center">Nuestra misión es hacer del LARP una experiencia accesible, emocionante y memorable para todos.</p>
             <p class="lead text-center">Únete a nosotros y haz de cada momento una epopeya inolvidable en Mortis Paco, donde la aventura nunca termina y los sueños se convierten en realidad.</p>
         </div>
+        <div class="container">
+            <div class="row text-center">
+  
+            <div class="col-lg-3 col-md-6 mb-4" th:each="producto : ${productos}">
+              <div class="card h-100">
+                <img class="card-img-top" th:src="${producto.imagen}" alt="">
+                <div class="card-body">
+                  <p class="card-text" th:text="${producto.nombre}"></p>
+                </div>
+                <div class="card-footer">
+                  <a th:href="${'/producto/'+producto.id}" class="btn btn-success">Ver producto</a>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
 </body>

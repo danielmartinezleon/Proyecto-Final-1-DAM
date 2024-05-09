@@ -2,18 +2,21 @@ package com.salesianostriana.dam.proyectofinaldanielmartinez.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Usuario {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String username;
@@ -23,14 +26,7 @@ public abstract class Usuario {
 	private String password;
 	private String direccion;
 	
-	public Usuario(String username, String nombre, String apellidos, String email, String password, String direccion) {
-		this.username = username;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.email = email;
-		this.password = password;
-		this.direccion = direccion;
-	}
+	
 	
 	
 	
