@@ -18,8 +18,7 @@ public class RegistroController {
 
     @GetMapping("/registro")
     public String registroForm(Model model) {
-        Cliente cliente = new Cliente();
-        model.addAttribute("cliente", cliente);
+        model.addAttribute("cliente", new Cliente());
         return "registro";
     }
 

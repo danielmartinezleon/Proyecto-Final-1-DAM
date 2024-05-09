@@ -7,9 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -25,12 +27,6 @@ public abstract class Usuario {
 	private String email;
 	private String password;
 	private String direccion;
-	
-	
-	
-	
-	
-	
 	
 	
 }
