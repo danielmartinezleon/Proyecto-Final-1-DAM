@@ -26,6 +26,6 @@ public class RegistroController {
     public String registroSubmit(@ModelAttribute("cliente") Cliente clienteForm) {
     	usuarioService.save(clienteForm);
         
-        return "redirect:/indexuser";
+        return "redirect:/";
     }
 }

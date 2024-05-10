@@ -29,12 +29,12 @@ public class AdminController {
 	public String indexadmin(Model model) {
     	List<Producto> productos = productoService.seleccionarProductosAleatorios(4);
 		model.addAttribute("productos", productos);
-		return "indexadmin";
+		return "/admin/indexadmin";
 	}
     
     @GetMapping("/admin/perfil")
 	public String perfiladmin() {
-		return "perfiladmin";
+		return "/admin/perfiladmin";
 	}
     
     @GetMapping("/admin/productos")
@@ -42,7 +42,7 @@ public class AdminController {
         List<Producto> productos = productoService.findAll();
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
-        return "meleeadmin";
+        return "/admin/meleeadmin";
     }
     
     @PostMapping("/admin/guardarProducto")
@@ -66,7 +66,7 @@ public class AdminController {
 		Producto editar = prod.get();
 		model.addAttribute("productoEdit", editar);
 		
-		return "formularioprod";
+		return "/admin/formularioprod";
 		
 	}
     
