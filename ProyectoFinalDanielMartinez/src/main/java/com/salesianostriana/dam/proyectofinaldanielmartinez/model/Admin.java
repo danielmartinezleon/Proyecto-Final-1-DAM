@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("A")
-public class Admin extends Usuario implements UserDetails{
+public class Admin extends Usuario{
 
 	@OneToMany(mappedBy = "admin", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
@@ -54,9 +54,6 @@ public class Admin extends Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	
 
-	
-	
+		
 }

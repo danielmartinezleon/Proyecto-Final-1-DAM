@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @DiscriminatorValue("C")
-public class Cliente extends Usuario implements UserDetails{
+public class Cliente extends Usuario{
 
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<Venta> ventas = new ArrayList<>();
@@ -31,11 +31,13 @@ public class Cliente extends Usuario implements UserDetails{
 		super(id, username, nombre, apellidos, email, password, direccion);
 	}
 
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_USER";
 		return List.of(new SimpleGrantedAuthority(role));
 	}
+
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -43,17 +45,20 @@ public class Cliente extends Usuario implements UserDetails{
 		return true;
 	}
 
+
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
+
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
 
 	@Override
 	public boolean isEnabled() {

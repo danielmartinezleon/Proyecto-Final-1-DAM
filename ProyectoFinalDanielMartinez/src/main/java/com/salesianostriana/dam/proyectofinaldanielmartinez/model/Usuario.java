@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.model;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Usuario {
+public abstract class Usuario implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,7 @@ public abstract class Usuario {
 	private String email;
 	private String password;
 	private String direccion;
+	
 	
 	
 }

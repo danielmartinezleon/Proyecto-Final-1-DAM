@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ClienteService;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
 
 @Controller
 public class RegistroController {
 
     @Autowired
-    private ClienteService clienteService;
+    private UsuarioService usuarioService;
 
     @GetMapping("/registro")
     public String registroForm(Model model) {
@@ -24,7 +24,7 @@ public class RegistroController {
 
     @PostMapping("/registro/submit")
     public String registroSubmit(@ModelAttribute("cliente") Cliente clienteForm) {
-    	clienteService.save(clienteForm);
+    	usuarioService.save(clienteForm);
         
         return "redirect:/indexuser";
     }
