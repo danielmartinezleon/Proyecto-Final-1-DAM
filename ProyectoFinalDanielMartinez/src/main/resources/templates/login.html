@@ -9,16 +9,16 @@
             <div class="col-md-6">
                 <div class="container">
                     <h3 class="mt-5 text-center">Iniciar Sesión</h3>
-                    <form th:action="@{/login}">
+                    <form th:action="@{/login}" method="post">
 	                    <div class="mb-3">
 	                        <label for="username" class="form-label">Nombre de usuario</label>
-	                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+	                        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
 	                    </div>
 	                    <div class="mb-3">
 	                        <label for="password" class="form-label">Contraseña</label>
-	                        <input type="password" class="form-control" id="password">
+	                        <input type="password" class="form-control" name="password" id="password">
 	                    </div>
-	                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+	                    <button type="submit" name="enviar" class="btn btn-primary">Iniciar sesión</button>
 	                    <p class="mt-2">¿No estás registrado aún? <a th:href="@{/registro}">Regístrate</a></p>
 	                    <p class="mt-2">--------------------------- O ---------------------------</p>
 	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-danger bi bi-google"></i> Iniciar con Google</a>

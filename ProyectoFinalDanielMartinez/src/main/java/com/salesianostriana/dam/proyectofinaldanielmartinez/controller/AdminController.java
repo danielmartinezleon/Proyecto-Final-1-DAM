@@ -76,5 +76,9 @@ public class AdminController {
     	return "redirect:/admin/productos";
     }
 
-
+    @GetMapping("/admin/cuero")
+	public String cueroadmin() {
+		return "cueroadmin";
+		
+	}
 }

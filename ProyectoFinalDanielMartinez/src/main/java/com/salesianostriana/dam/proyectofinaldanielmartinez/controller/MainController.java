@@ -30,14 +30,6 @@ public class MainController {
 	}
 	
 	
-	@GetMapping("/indexuser")
-	public String indexuser(Model model) {
-		List<Producto> productos = productoService.seleccionarProductosAleatorios(4);
-		model.addAttribute("productos", productos);
-		return "indexuser";
-	}
-	
-	
 	
 	@GetMapping("/melee")
     public String listarProductosAdmin(Model model) {
@@ -46,24 +38,12 @@ public class MainController {
         return "melee";
     }
 	
-	
-	@GetMapping("/meleeuser")
-	public String meleeuser() {
-		return "meleeuser";
-		
-	}
-	
 	@GetMapping("/producto")
 	public String producto() {
 		return "producto";
 		
 	}
 	
-	@GetMapping("/productouser")
-	public String productouser() {
-		return "productouser";
-		
-	}
 	
 	@GetMapping("/cuero")
 	public String cuero() {
@@ -71,29 +51,13 @@ public class MainController {
 		
 	}
 	
-	@GetMapping("/cuerouser")
-	public String cuerouser() {
-		return "cuerouser";
 		
-	}
-	
-	@GetMapping("/cueroadmin")
-	public String cueroadmin() {
-		return "cueroadmin";
-		
-	}
-	
 	@GetMapping("/armadura1")
 	public String armadura1() {
 		return "armadura1";
 		
 	}
 	
-	@GetMapping("/armadura1user")
-	public String armadura1user() {
-		return "armadura1user";
-		
-	}
 	
 	
 }
