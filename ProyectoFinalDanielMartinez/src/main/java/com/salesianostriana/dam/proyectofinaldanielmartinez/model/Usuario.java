@@ -7,42 +7,63 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario implements UserDetails{
-	
-	private static final long serialVersionUID = 1L;
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+public abstract class Usuario implements UserDetails {
+    
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	protected String username, password;
+	private String username;
+	private String nombre;
+	private String apellidos;
+	private String email;
+	private String password;
+	private String direccion;
 	
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-	    String role = "ROLE_";
-	    if (this instanceof Admin) {
-	        role += "ADMIN";
-	    } else {
-	        role += "USER";
-	    }
-	    return List.of(new SimpleGrantedAuthority(role));
+	public Usuario(String username, String nombre, String apellidos, String email, String password, String direccion) {
+		this.username = username;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.password = password;
+		this.direccion = direccion;
 	}
-
-	@Override
+	
+	
+    
+    @Column(name = "tipo", insertable = false, updatable = false)
+    private String tipo;
+    
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String role = "ROLE_";
+        if ("ADMIN".equals(this.tipo)) {
+            role += "ADMIN";
+        } else {
+            role += "USER";
+        }
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+    
+    @Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
@@ -65,5 +86,4 @@ public abstract class Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
 }

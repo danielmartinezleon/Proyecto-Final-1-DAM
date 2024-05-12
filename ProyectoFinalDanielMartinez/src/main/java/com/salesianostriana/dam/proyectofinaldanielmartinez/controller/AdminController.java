@@ -78,7 +78,7 @@ public class AdminController {
 
     @GetMapping("/admin/cuero")
 	public String cueroadmin() {
-		return "cueroadmin";
+		return "/admin/cueroadmin";
 		
 	}
 }

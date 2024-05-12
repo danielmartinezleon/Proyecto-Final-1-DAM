@@ -47,35 +47,12 @@
 	                        <input class="form-control me-2" type="text" placeholder="Buscar">
 	                        <button class="btn btn-primary" type="button">Buscar</button>
 	                    </form>
-	                    <button class="btn btn-light ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLoginForm">LOGIN</button>
+	                    <a class="btn btn-light ms-2" th:href="@{/login}" >LOGIN</a>
 	                    <a class="btn btn-light ms-2" href="#"><i class="bi bi-cart"></i></a>
 	                </div>
 	            </div>
 	        </nav>
 	        
-	        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLoginForm" aria-labelledby="offcanvasLoginFormLabel">
-	            <div class="offcanvas-header">
-	                <h5 class="offcanvas-title" id="offcanvasLoginFormLabel">Inicio de sesión</h5>
-	                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-	            </div>
-	            <div class="offcanvas-body">
-	                <form>
-	                    <div class="mb-3">
-	                        <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
-	                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-	                    </div>
-	                    <div class="mb-3">
-	                        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-	                        <input type="password" class="form-control" id="exampleInputPassword1">
-	                    </div>
-	                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-	                    <p class="mt-2">¿No estás registrado aún? <a th:href="@{/registro}">Regístrate</a></p>
-	                    <p class="mt-2">--------------------------- O ---------------------------</p>
-	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-danger bi bi-google"></i> Iniciar con Google</a>
-	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-primary bi bi-facebook"></i> Iniciar con Facebook</a>
-	                </form>
-	            </div>
-	        </div>
 	    </header>
 	
 </html>

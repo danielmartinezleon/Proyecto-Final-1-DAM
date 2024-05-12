@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,9 @@ public class RegistroController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/registro")
     public String registroForm(Model model) {
@@ -23,9 +27,14 @@ public class RegistroController {
     }
 
     @PostMapping("/registro/submit")
-    public String registroSubmit(@ModelAttribute("cliente") Cliente clienteForm) {
-    	usuarioService.save(clienteForm);
+    public String submitRegistro(@ModelAttribute("cliente") Cliente cliente) {
+        String encodedPassword = passwordEncoder.encode(cliente.getPassword());
+        cliente.setPassword(encodedPassword);
         
+        usuarioService.save(cliente);
         return "redirect:/";
     }
+
+
+
 }

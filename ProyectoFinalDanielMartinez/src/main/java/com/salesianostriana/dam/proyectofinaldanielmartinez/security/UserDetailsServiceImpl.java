@@ -5,9 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Usuario;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
