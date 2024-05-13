@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -32,10 +33,6 @@ public class Venta {
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_cliente_venta"))
 	private Cliente cliente;
 	
-	@ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_admin_venta"))
-	private Admin admin;
-	
-	
-	//private List<LineaVenta> lineas;
+	@OneToMany(mappedBy = "venta")
+	private List<LineaVenta> lineas;
 }

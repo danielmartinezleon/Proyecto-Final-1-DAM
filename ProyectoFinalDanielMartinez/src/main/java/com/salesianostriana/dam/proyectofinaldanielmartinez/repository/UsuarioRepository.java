@@ -9,4 +9,8 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	Optional<Usuario> findFirstByUsername(String username);
+	
+	boolean existsByUsername(String username);
+
+	boolean existsByEmail(String email);
 }

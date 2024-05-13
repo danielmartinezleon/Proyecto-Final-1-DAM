@@ -9,11 +9,12 @@
             <div class="col-md-6">
                 <div class="container">
                     <h3 class="mt-5 text-center">Registro de usuario</h3>
-                    <form th:action="@{/registro/submit}" th:object="${cliente}" method="post">
+                    <form th:action="@{/registro/submit}" th:object="${cliente}" method="post" id="registroForm">
                         
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Username:</label>
+                            <label for="username" class="form-label">Username:</label>
                             <input type="text" class="form-control" id="username" th:field="*{username}" name="username" placeholder="Nombre de usuario" required>
+                            <div th:if="${errorUsername}" class="text-danger" th:text="${errorUsername}"></div>
                         </div>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
@@ -34,6 +35,7 @@
                         <div class="mb-3">
                             <label for="emailconf" class="form-label">Confirmar email:</label>
                             <input type="email" class="form-control" id="emailconf" name="emailconf" placeholder="Confirme correo electrónico" required>
+                            <div th:id="emailError" class="text-danger"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña:</label>
@@ -42,6 +44,7 @@
                         <div class="mb-3">
                             <label for="passwordconf" class="form-label">Confirmar contraseña:</label>
                             <input type="password" class="form-control" id="passwordconf" name="passwordconf" placeholder="Confirme su contraseña" required>
+                            <div th:id="passwordError" class="text-danger"></div>
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Registrarse</button>
@@ -54,5 +57,7 @@
     </main>
 
     <footer th:replace="~{fragments/footer::pie}"></footer>
+
+    <script src="../static/js/registro.js" th:src="@{/js/registro.js}" defer></script>
 </body>
 </html>

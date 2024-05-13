@@ -27,12 +27,21 @@ public class RegistroController {
     }
 
     @PostMapping("/registro/submit")
-    public String submitRegistro(@ModelAttribute("cliente") Cliente cliente) {
+    public String submitRegistro(@ModelAttribute("cliente") Cliente cliente, Model model) {
+        if (usuarioService.existeUsername(cliente.getUsername())) {
+            model.addAttribute("errorUsername", "El nombre de usuario ya está registrado");
+            return "registro";
+        }
+        if (usuarioService.existeEmail(cliente.getEmail())) {
+            model.addAttribute("errorEmail", "El correo electrónico ya está registrado");
+            return "registro";
+        }else {
+        	cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        	usuarioService.save(cliente);
+        	return "redirect:/";
+        }
         
-        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         
-        usuarioService.save(cliente);
-        return "redirect:/";
     }
 
 
