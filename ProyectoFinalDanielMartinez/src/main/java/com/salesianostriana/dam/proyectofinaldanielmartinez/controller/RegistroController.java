@@ -28,8 +28,8 @@ public class RegistroController {
 
     @PostMapping("/registro/submit")
     public String submitRegistro(@ModelAttribute("cliente") Cliente cliente) {
-        String encodedPassword = passwordEncoder.encode(cliente.getPassword());
-        cliente.setPassword(encodedPassword);
+        
+        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         
         usuarioService.save(cliente);
         return "redirect:/";
