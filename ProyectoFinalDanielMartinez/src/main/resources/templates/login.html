@@ -18,9 +18,12 @@
 	                        <label for="password" class="form-label">Contraseña</label>
 	                        <input type="password" class="form-control" name="password" id="password">
 	                    </div>
-	                    <button type="submit" name="enviar" class="btn btn-primary">Iniciar sesión</button>
+						<div class="d-grid gap-2">
+							<button type="submit" name="enviar" class="btn btn-primary">Iniciar sesión</button>
+						</div>
+	                    
 	                    <p class="mt-2">¿No estás registrado aún? <a th:href="@{/registro}">Regístrate</a></p>
-	                    <p class="mt-2">--------------------------- O ---------------------------</p>
+	                    <p class="mt-2"><hr/></p>
 	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-danger bi bi-google"></i> Iniciar con Google</a>
 	                    <a class="btn btn-light my-1 d-block" href="#"><i class="text-primary bi bi-facebook"></i> Iniciar con Facebook</a>
 	                </form>
