@@ -13,59 +13,67 @@
                             <li class="list-group-item"><a href="#">Ver Histórico</a></li>
                             <li class="list-group-item"><a href="#">Descuentos</a></li>
                             <li class="list-group-item"><a href="#">Eventos</a></li>
-                            <li class="list-group-item"><a href="#">Cerrar Sesión</a></li>
+                            <li class="list-group-item"><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="col-md-9">
                     <!-- Contenido principal: Datos del usuario -->
                     <h2 class="mb-4">Mi cuenta</h2>
-                    <div id="userData">
+                    <div id="userData" th:object="${admin}">
                         <table class="table table-striped">
                             <tr>
+                                <th>Nombre de usuario</th>
+                                <td th:text="${admin.username}"></td>
+                            </tr>
+                            <tr>
                                 <th>Nombre</th>
-                                <td>Juan</td>
+                                <td th:text="${admin.nombre}"></td>
                             </tr>
                             <tr>
                                 <th>Apellidos</th>
-                                <td>Pérez García</td>
+                                <td th:text="${admin.apellidos}"></td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td>juan@example.com</td>
+                                <td th:text="${admin.email}"></td>
                             </tr>
                             <tr>
                                 <th>Dirección</th>
-                                <td>Calle Principal, 123</td>
+                                <td th:text="${admin.direccion}"></td>
                             </tr>
                             <tr>
                                 <th>Contraseña</th>
-                                <td>********</td>
+                                <td><input type="password" class="form-control" value="${admin.password}" disabled></td>
                             </tr>
                         </table>
                     </div>
                     <button id="editarPerfilBtn" class="btn btn-primary mb-4">Editar perfil</button>
-                    <!-- Formulario de edición oculto -->
-                    <form id="editarPerfilForm" style="display: none;">
+                    
+                    <form th:object="${admin}" th:action="@{/admin/profileEdit/submit}" id="editarPerfilForm" style="display: none;" method="post">
+                        <div class="mb-3">
+                            <label for="nombreEdit">Nombre de usuario:</label>
+                            <input type="text" class="form-control" id="usernameEdit" th:field="*{username}" placeholder="Nombre">
+                        </div>
                         <div class="mb-3">
                             <label for="nombreEdit">Nombre:</label>
-                            <input type="text" class="form-control" id="nombreEdit" placeholder="Nombre">
+                            <input type="text" class="form-control" id="nombreEdit" th:field="*{nombre}" placeholder="Nombre">
                         </div>
                         <div class="mb-3">
                             <label for="apellidosEdit">Apellidos:</label>
-                            <input type="text" class="form-control" id="apellidosEdit" placeholder="Apellidos">
+                            <input type="text" class="form-control" id="apellidosEdit" th:field="*{apellidos}" placeholder="Apellidos">
                         </div>
                         <div class="mb-3">
                             <label for="emailEdit">Email:</label>
-                            <input type="email" class="form-control" id="emailEdit" placeholder="Email">
+                            <input type="email" class="form-control" id="emailEdit" th:field="*{email}" placeholder="Email">
                         </div>
                         <div class="mb-3">
                             <label for="direccionEdit">Dirección:</label>
-                            <input type="text" class="form-control" id="direccionEdit" placeholder="Dirección">
+                            <input type="text" class="form-control" id="direccionEdit" th:field="*{direccion}" placeholder="Dirección">
                         </div>
                         <div class="mb-3">
                             <label for="passwordEdit">Contraseña:</label>
-                            <input type="password" class="form-control" id="passwordEdit" placeholder="Contraseña">
+                            <input type="password" class="form-control" id="passwordEdit" th:field="*{password}" placeholder="Contraseña">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>

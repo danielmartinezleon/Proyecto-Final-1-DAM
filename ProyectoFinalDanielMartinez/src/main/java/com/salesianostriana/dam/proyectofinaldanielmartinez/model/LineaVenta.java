@@ -19,7 +19,7 @@ public class LineaVenta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	private double pvp;
+	//private double pvp;
 	
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_linea_producto"))
@@ -30,5 +30,9 @@ public class LineaVenta {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_linea_venta"))
 	private Venta venta;
+	
+	public double getTotalLinea() {
+		return producto.getPrecio() * cantidad;
+	}
 
 }

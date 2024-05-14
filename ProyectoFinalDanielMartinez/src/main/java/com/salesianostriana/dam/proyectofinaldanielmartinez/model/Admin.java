@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.model;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity

@@ -35,7 +35,7 @@
                         <div class="mb-3">
                             <label for="emailconf" class="form-label">Confirmar email:</label>
                             <input type="email" class="form-control" id="emailconf" name="emailconf" placeholder="Confirme correo electrónico" required>
-                            <div th:id="emailError" class="text-danger"></div>
+                            <div th:id="emailError" id="emailError" class="text-danger"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña:</label>
@@ -44,7 +44,7 @@
                         <div class="mb-3">
                             <label for="passwordconf" class="form-label">Confirmar contraseña:</label>
                             <input type="password" class="form-control" id="passwordconf" name="passwordconf" placeholder="Confirme su contraseña" required>
-                            <div th:id="passwordError" class="text-danger"></div>
+                            <div th:id="passwordError" id="passwordError" class="text-danger"></div>
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Registrarse</button>

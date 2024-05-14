@@ -1,17 +1,22 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.repository.AdminRepository;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
 
 import org.springframework.ui.Model;
 
@@ -20,6 +25,15 @@ public class AdminController {
 
 	@Autowired
     private ProductoService productoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private AdminRepository adminRepository;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AdminController(ProductoService productoService) {
         this.productoService = productoService;
@@ -81,4 +95,22 @@ public class AdminController {
 		return "/admin/cueroadmin";
 		
 	}
+    
+    @GetMapping("/admin/profile")
+    public String adminProfile(Model model, Principal principal) {
+        String username = principal.getName();
+
+        Optional<Admin> adminExiste = adminRepository.findByUsername(username);
+        Admin admin = adminExiste.get();
+        model.addAttribute("admin", admin);
+    	return "/admin/perfiladmin";
+    }
+    
+    @PostMapping("/admin/profileEdit/submit")
+    public String adminEditProfile(@ModelAttribute("admin") Admin admin) {
+    	admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+		usuarioService.edit(admin);
+    	return "redirect:/admin/profile";
+    	
+    }
 }
