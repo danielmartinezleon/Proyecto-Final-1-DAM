@@ -12,3 +12,4 @@ insert into Producto (nombre, descripcion, stock, precio, imagen) values ('Hoja 
 insert into Producto (nombre, descripcion, stock, precio, imagen) values ('Espada del Guardián', 'Forjada para proteger los reinos, esta espada es un símbolo de honor y deber.', 5, 160.90, 'https://mortisdraco.com/wp-content/uploads/2019/10/442421-1.jpg');
 
 insert into Usuario (username, nombre, apellidos, email, password, direccion, tipo) values ('admin', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Falsa 123', 'ADMIN');
+insert into Usuario (username, nombre, apellidos, email, password, direccion, tipo) values ('user', 'Luismi', 'Lopez', 'luismi.lopez@triana.salesianos.edu', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 434', 'USER');

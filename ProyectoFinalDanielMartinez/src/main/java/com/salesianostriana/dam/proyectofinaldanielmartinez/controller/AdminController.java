@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,20 +98,17 @@ public class AdminController {
 	}
     
     @GetMapping("/admin/profile")
-    public String adminProfile(Model model, Principal principal) {
-        String username = principal.getName();
-
-        Optional<Admin> adminExiste = adminRepository.findByUsername(username);
-        Admin admin = adminExiste.get();
+    public String adminProfile(Model model, @AuthenticationPrincipal Admin admin) {
+        
         model.addAttribute("admin", admin);
     	return "/admin/perfiladmin";
     }
-    
+    /*
     @PostMapping("/admin/profileEdit/submit")
     public String adminEditProfile(@ModelAttribute("admin") Admin admin) {
     	admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 		usuarioService.edit(admin);
     	return "redirect:/admin/profile";
     	
-    }
+    }*/
 }
