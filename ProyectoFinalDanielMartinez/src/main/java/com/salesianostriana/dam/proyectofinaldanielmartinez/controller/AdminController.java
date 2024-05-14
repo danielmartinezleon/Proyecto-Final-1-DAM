@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.repository.AdminRepository;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -31,7 +31,7 @@ public class AdminController {
 	private UsuarioService usuarioService;
 	
 	@Autowired
-	private AdminRepository adminRepository;
+    private HttpSession httpSession;
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
@@ -103,12 +103,13 @@ public class AdminController {
         model.addAttribute("admin", admin);
     	return "/admin/perfiladmin";
     }
-    /*
+    
     @PostMapping("/admin/profileEdit/submit")
     public String adminEditProfile(@ModelAttribute("admin") Admin admin) {
     	admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 		usuarioService.edit(admin);
-    	return "redirect:/admin/profile";
+		httpSession.invalidate();
+    	return "redirect:/login";
     	
-    }*/
+    }
 }

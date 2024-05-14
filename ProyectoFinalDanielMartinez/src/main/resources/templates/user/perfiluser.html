@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head::head}"></head>
 <body class="d-flex flex-column vh-100">
-    <header th:replace="~{fragments/headeradmin::cabezaadmin}"></header>
+    <header th:replace="~{fragments/headeruser::cabezauser}"></header>
     <main class="flex-grow-1 d-flex justify-content-center align-items-center" style="margin-top: 56px;">
         <div class="container">
             <div class="row">
@@ -10,9 +10,8 @@
                     <aside class="bg-light p-4">
                         <h4 class="mb-4">Opciones</h4>
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="#">Ver Histórico</a></li>
-                            <li class="list-group-item"><a href="#">Descuentos</a></li>
-                            <li class="list-group-item"><a href="#">Eventos</a></li>
+                            <li class="list-group-item"><a href="#">Mi perfil</a></li>
+                            <li class="list-group-item"><a href="#">Mis pedidos</a></li>
                             <li class="list-group-item"><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
                         </ul>
                     </aside>
@@ -20,37 +19,37 @@
                 <div class="col-md-9">
                     <!-- Contenido principal: Datos del usuario -->
                     <h2 class="mb-4">Mi cuenta</h2>
-                    <div id="userData" th:object="${admin}">
+                    <div id="userData" th:object="${usuario}">
                         <table class="table table-striped">
                             <tr>
                                 <th>Nombre de usuario</th>
-                                <td th:text="${admin.username}"></td>
+                                <td th:text="${usuario.username}"></td>
                             </tr>
                             <tr>
                                 <th>Nombre</th>
-                                <td th:text="${admin.nombre}"></td>
+                                <td th:text="${usuario.nombre}"></td>
                             </tr>
                             <tr>
                                 <th>Apellidos</th>
-                                <td th:text="${admin.apellidos}"></td>
+                                <td th:text="${usuario.apellidos}"></td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td th:text="${admin.email}"></td>
+                                <td th:text="${usuario.email}"></td>
                             </tr>
                             <tr>
                                 <th>Dirección</th>
-                                <td th:text="${admin.direccion}"></td>
+                                <td th:text="${usuario.direccion}"></td>
                             </tr>
                             <tr>
                                 <th>Contraseña</th>
-                                <td><input type="password" class="form-control" value="${admin.password}" disabled></td>
+                                <td><input type="password" class="form-control" value="${usuario.password}" disabled></td>
                             </tr>
                         </table>
                     </div>
                     <button id="editarPerfilBtn" class="btn btn-primary mb-4">Editar perfil</button>
                     
-                    <form th:object="${admin}" th:action="@{/admin/profileEdit/submit}" id="editarPerfilForm" style="display: none;" method="post">
+                    <form th:object="${usuario}" th:action="@{/user/profileEdit/submit}" id="editarPerfilForm" style="display: none;" method="post">
                         <input type="hidden" th:field="*{id}" />
                         <div class="mb-3">
                             <label for="nombreEdit">Nombre de usuario:</label>
@@ -76,6 +75,7 @@
                             <label for="passwordEdit">Contraseña:</label>
                             <input type="password" class="form-control" id="passwordEdit" th:field="*{password}" placeholder="Contraseña">
                         </div>
+                        <input type="hidden" th:field="*{id}" />
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
