@@ -100,9 +100,19 @@
                         <label for="imagen">Imagen (URL):</label>
                         <input type="text" class="form-control" id="imagen" name="imagen" th:field="*{imagen}" placeholder="Ingrese la URL de la imagen">
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        <div style="display: none;">
+                            <select class="form-select" name="tipo" aria-label="tipo-desarrollo" th:field="*{tipo}">
+                                <option th:each="tipo : ${T(com.salesianostriana.dam.proyectofinaldanielmartinez.model.Tipo).values()}"
+                                        th:value="${tipo}" 
+                                        th:text="${tipo}"
+                                        th:selected="${tipo == com.salesianostriana.dam.proyectofinaldanielmartinez.model.Tipo.MELEE}"></option>                       
+                            </select>
+                            
+                        </div>
                     </div>
                 </form>
 
@@ -121,5 +131,15 @@
     }
     rango.addEventListener('input', actualizarValor);
     actualizarValor();
+
+    
 </script>
 </html>
+<!--
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        let valor = 'MELEE';
+        document.getElementById('tipo').value = valor;
+    });
+</script>
+-->

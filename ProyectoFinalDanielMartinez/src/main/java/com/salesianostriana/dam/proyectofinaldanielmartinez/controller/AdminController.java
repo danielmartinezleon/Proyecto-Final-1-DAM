@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Tipo;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.AdminService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
@@ -69,6 +70,7 @@ public class AdminController {
     
     @PostMapping("/admin/guardarProducto")
     public String guardarProducto(@ModelAttribute Producto producto) {
+    	
     	productoService.save(producto);
         return "redirect:/admin/productos";
     }
