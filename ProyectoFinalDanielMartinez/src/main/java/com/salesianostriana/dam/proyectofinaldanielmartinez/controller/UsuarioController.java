@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ClienteService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
 
@@ -30,6 +34,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	@Autowired
     private HttpSession httpSession;
@@ -73,17 +80,19 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/user/profile")
-    public String adminProfile(Model model, @AuthenticationPrincipal Cliente cliente) {
+    public String userProfile(Model model, @AuthenticationPrincipal Cliente cliente) {
         model.addAttribute("usuario", cliente);
     	return "/user/perfiluser";
     }
     
-    @PostMapping("/uuser/profileEdit/submit")
-    public String adminEditProfile(@ModelAttribute("usuario") Cliente cliente) {
+    @PostMapping("/user/profileEdit/submit")
+    public String userEditProfile(@ModelAttribute("usuario") Cliente cliente) {
     	cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
-		usuarioService.edit(cliente);
-		httpSession.invalidate();
-    	return "redirect:/login";
+    	Cliente clienteEdit = clienteService.edit(cliente);
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth = new UsernamePasswordAuthenticationToken(clienteEdit, auth.getCredentials(), auth.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    	return "redirect:/user/profile";
     	
     }
 }

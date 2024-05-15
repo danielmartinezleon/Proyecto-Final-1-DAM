@@ -5,15 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.AdminService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
 
@@ -32,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
     private HttpSession httpSession;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
@@ -99,17 +106,17 @@ public class AdminController {
     
     @GetMapping("/admin/profile")
     public String adminProfile(Model model, @AuthenticationPrincipal Admin admin) {
-        
         model.addAttribute("admin", admin);
     	return "/admin/perfiladmin";
     }
     
     @PostMapping("/admin/profileEdit/submit")
     public String adminEditProfile(@ModelAttribute("admin") Admin admin) {
-    	admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-		usuarioService.edit(admin);
-		httpSession.invalidate();
-    	return "redirect:/login";
-    	
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        Admin updatedAdmin = adminService.edit(admin);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth = new UsernamePasswordAuthenticationToken(updatedAdmin, auth.getCredentials(), auth.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return "redirect:/admin/profile";
     }
 }
