@@ -6,9 +6,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
@@ -30,6 +33,8 @@ public class Producto {
     
     private String imagen;
     
-    @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @ToString.Exclude
+    private Categoria categoria;
 }

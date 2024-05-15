@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Tipo;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.AdminService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
@@ -60,44 +60,100 @@ public class AdminController {
 		return "/admin/perfiladmin";
 	}
     
-    @GetMapping("/admin/productos")
-    public String listarProductosAdmin(Model model) {
+    @GetMapping("/admin/productos/melee")
+    public String listarMeleeAdmin(Model model) {
         List<Producto> productos = productoService.findAll();
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/meleeadmin";
     }
     
-    @PostMapping("/admin/guardarProducto")
-    public String guardarProducto(@ModelAttribute Producto producto) {
-    	
+    @RequestMapping("/admin/productos/melee/{id}")
+    public String cargarProductoMelee(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/admin/productoadmin";
+    }
+    
+    @RequestMapping("/admin/productos/distancia/{id}")
+    public String cargarProductoDistancia(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+        Producto producto = optionalProducto.get();
+        System.out.println(producto);
+        model.addAttribute("producto", producto);
+        return "/admin/productoadmin";
+    }
+    
+    @GetMapping("/admin/productos/distancia")
+    public String listarDistanciaAdmin(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/admin/distanciaadmin";
+    }
+    
+    @PostMapping("/admin/productos/melee/guardarProducto")
+    public String guardarMelee(@ModelAttribute Producto producto) {
     	productoService.save(producto);
-        return "redirect:/admin/productos";
+        return "redirect:/admin/productos/melee";
     }
 
    
-    @PostMapping("/admin/eliminarProducto/{id}")
-    public String eliminarProducto(@PathVariable("id") Long id) {
+    @PostMapping("/admin/productos/melee/eliminarProducto/{id}")
+    public String eliminarMelee(@PathVariable("id") Long id) {
         productoService.deleteById(id);
-        return "redirect:/admin/productos";
+        return "redirect:/admin/productos/melee";
     }
     
     
-    @GetMapping("/editar/{id}")
-	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+    @GetMapping("/admin/productos/melee/editar/{id}")
+	public String mostrarFormularioMelee(@PathVariable("id") long id, Model model) {
 		Optional<Producto> prod = productoService.findById(id);
 		
 		Producto editar = prod.get();
 		model.addAttribute("productoEdit", editar);
 		
-		return "/admin/formularioprod";
+		return "/admin/editmelee";
 		
 	}
     
-    @PostMapping("/editar/submit")
-    public String procesarFormulario(@ModelAttribute("productoEdit") Producto p) {
+    @PostMapping("/admin/productos/melee/editar/submit")
+    public String procesarMelee(@ModelAttribute("productoEdit") Producto p) {
     	productoService.edit(p);
-    	return "redirect:/admin/productos";
+    	return "redirect:/admin/productos/melee";
+    }
+
+    @PostMapping("/admin/productos/distancia/guardarProducto")
+    public String guardarDistancia(@ModelAttribute Producto producto) {
+    	productoService.save(producto);
+        return "redirect:/admin/productos/distancia";
+    }
+
+   
+    @PostMapping("/admin/productos/distancia/eliminarProducto/{id}")
+    public String eliminarDistancia(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos/distancia";
+    }
+    
+    
+    @GetMapping("/admin/productos/distancia/editar/{id}")
+	public String mostrarFormularioDistancia(@PathVariable("id") long id, Model model) {
+		Optional<Producto> prod = productoService.findById(id);
+		
+		Producto editar = prod.get();
+		model.addAttribute("productoEdit", editar);
+		
+		return "/admin/editdistancia";
+		
+	}
+    
+    @PostMapping("/admin/productos/distancia/editar/submit")
+    public String procesarDistancia(@ModelAttribute("productoEdit") Producto p) {
+    	productoService.edit(p);
+    	return "redirect:/admin/productos/distancia";
     }
 
     @GetMapping("/admin/cuero")

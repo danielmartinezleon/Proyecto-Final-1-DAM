@@ -17,13 +17,13 @@
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav d-flex align-items-center ms-auto">
                         <li class="nav-item dropdown" onmouseover="showDropdown(this)" onmouseout="hideDropdown(this)">
-                            <a class="nav-link text-white dropdown-toggle" href="./juegos.html" id="navbarDropdownArmas" role="button" aria-expanded="false">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownArmas" role="button" aria-expanded="false">
                                 <img src="../../static/img/espadas.png" th:src="@{/img/espadas.png}" alt="Armas" class="me-1">
                                 Armas
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownArmas">
-                                <li><a class="dropdown-item" th:href="@{/user/productos}">Melee</a></li>
-                                <li><a class="dropdown-item" href="#">Distancia</a></li>
+                                <li><a class="dropdown-item" th:href="@{/user/productos/melee}">Melee</a></li>
+                                <li><a class="dropdown-item" th:href="@{/user/productos/distancia}">Distancia</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" onmouseover="showDropdown(this)" onmouseout="hideDropdown(this)">

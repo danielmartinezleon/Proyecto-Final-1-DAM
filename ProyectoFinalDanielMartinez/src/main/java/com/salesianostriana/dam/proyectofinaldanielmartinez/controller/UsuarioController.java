@@ -51,15 +51,33 @@ public class UsuarioController {
 		return "/user/indexuser";
 	}
 	
-	@GetMapping("/user/productos")
-    public String listarProductos(Model model) {
+	@GetMapping("/user/productos/melee")
+    public String listarMeleeUser(Model model) {
         List<Producto> productos = productoService.findAll();
         model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
         return "/user/meleeuser";
     }
 	
-	@RequestMapping("/user/producto/{id}")
-    public String cargarProducto(@PathVariable("id") Long id, Model model) {
+	@GetMapping("/user/productos/distancia")
+    public String listarDistanciaUser(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/user/distanciauser";
+    }
+    
+    @RequestMapping("/user/productos/melee/{id}")
+    public String cargarProductoMelee(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
+    
+    @RequestMapping("/user/productos/distancia/{id}")
+    public String cargarProductoDistancia(@PathVariable("id") Long id, Model model) {
         Optional<Producto> optionalProducto = productoService.findById(id);
         Producto producto = optionalProducto.get();
         System.out.println(producto);

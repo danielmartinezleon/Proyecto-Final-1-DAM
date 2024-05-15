@@ -32,10 +32,17 @@ public class MainController {
 	
 	
 	@GetMapping("/melee")
-    public String listarProductosAdmin(Model model) {
+    public String listarProductosMelee(Model model) {
         List<Producto> productos = productoService.findAll();
         model.addAttribute("productos", productos);
         return "melee";
+    }
+	
+	@GetMapping("/distancia")
+    public String listarProductosDistancia(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        return "distancia";
     }
 	
 	@GetMapping("/producto")
