@@ -26,14 +26,42 @@ public class ProductoService
         return productosAleatorios;
     }
 	
-	public List<Producto> mostrarProductosMelee(List<Producto> cat){
-		
-		return repository.productosMelee(cat);
-		
+	public List<Producto> mostrarProductosMelee(){
+		return repository.productosMelee();
+	}
+	
+	public List<Producto> mostrarProductosDistancia(){
+		return repository.productosDistancia();
+	}
+	
+	public List<Producto> mostrarProductosCuero(){
+		return repository.productosCuero();
+	}
+	
+	public List<Producto> mostrarProductosMetal(){
+		return repository.productosMetal();
+	}
+	
+	public List<Producto> mostrarProductosOtros(){
+		return repository.productosOtros();
 	}
 
-	
-	
+	public List<Producto> ordenarProductosPorNombreAsc(long categoriaId) {
+        return repository.findAllByCategoriaIdOrderByNombreAsc(categoriaId);
+    }
+
+    public List<Producto> ordenarProductosPorPrecioAsc(long categoriaId) {
+        return repository.findAllByCategoriaIdOrderByPrecioAsc(categoriaId);
+    }
+
+    public List<Producto> ordenarProductosPorPrecioDesc(long categoriaId) {
+        return repository.findAllByCategoriaIdOrderByPrecioDesc(categoriaId);
+    }
+    
+    public List<Producto> filtrarProductosPorPrecioMaximo(double precioMaximo) {
+        return repository.findByPrecioLessThanEqual(precioMaximo);
+    }
+
 	
 	
 }

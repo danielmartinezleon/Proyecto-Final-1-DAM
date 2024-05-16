@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
@@ -51,8 +52,29 @@ public class AdminController {
 	}
     
     @GetMapping("/admin/productos/melee")
-    public String listarMeleeAdmin(Model model) {
-        List<Producto> productos = productoService.findAll();
+    public String listarMeleeAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosMelee = productoService.mostrarProductosMelee();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(1);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(1);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(1);
+                    break;
+                default:
+                    productos = productosMelee;
+                    break;
+            }
+        } else {
+            productos = productosMelee;
+        }
+
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/meleeadmin";
@@ -77,12 +99,36 @@ public class AdminController {
     }
     
     @GetMapping("/admin/productos/distancia")
-    public String listarDistanciaAdmin(Model model) {
-        List<Producto> productos = productoService.findAll();
+    public String listarDistanciaAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
+        List<Producto> productosDistancia = productoService.mostrarProductosDistancia();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(2);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(2);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(2);
+                    break;
+                default:
+                    productos = productosDistancia;
+                    break;
+            }
+        } else {
+            productos = productosDistancia;
+        }
+
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/distanciaadmin";
     }
+
+
+
     
     @PostMapping("/admin/productos/melee/guardarProducto")
     public String guardarMelee(@ModelAttribute Producto producto) {
@@ -147,8 +193,29 @@ public class AdminController {
     }
     
     @GetMapping("/admin/productos/cuero")
-    public String listarCueroAdmin(Model model) {
-        List<Producto> productos = productoService.findAll();
+    public String listarCueroAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosCuero = productoService.mostrarProductosCuero();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(3);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(3);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(3);
+                    break;
+                default:
+                    productos = productosCuero;
+                    break;
+            }
+        } else {
+            productos = productosCuero;
+        }
+
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/cueroadmin";
@@ -193,8 +260,29 @@ public class AdminController {
     }
     
     @GetMapping("/admin/productos/metal")
-    public String listarMetalAdmin(Model model) {
-        List<Producto> productos = productoService.findAll();
+    public String listarMetalAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosMetal = productoService.mostrarProductosMetal();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(4);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(4);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(4);
+                    break;
+                default:
+                    productos = productosMetal;
+                    break;
+            }
+        } else {
+            productos = productosMetal;
+        }
+
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/metaladmin";
@@ -239,8 +327,29 @@ public class AdminController {
     }
     
     @GetMapping("/admin/productos/otros")
-    public String listarOtrosAdmin(Model model) {
-        List<Producto> productos = productoService.findAll();
+    public String listarOtrosAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosOtros = productoService.mostrarProductosOtros();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(5);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(5);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(5);
+                    break;
+                default:
+                    productos = productosOtros;
+                    break;
+            }
+        } else {
+            productos = productosOtros;
+        }
+
         model.addAttribute("productos", productos);
         model.addAttribute("producto", new Producto());
         return "/admin/otrosadmin";
@@ -284,11 +393,6 @@ public class AdminController {
     	return "redirect:/admin/productos/otros";
     }
 
-    @GetMapping("/admin/cuero")
-	public String cueroadmin() {
-		return "/admin/cueroadmin";
-		
-	}
     
     @GetMapping("/admin/profile")
     public String adminProfile(Model model, @AuthenticationPrincipal Admin admin) {

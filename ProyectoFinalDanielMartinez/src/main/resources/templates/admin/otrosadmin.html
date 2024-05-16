@@ -14,7 +14,7 @@
 						</button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                        <div th:each="producto, iterStat : ${productos}" class="col-md-3" th:if="${producto.categoria.id == 5}">
+                        <div th:each="producto, iterStat : ${productos}" class="col-md-3">
                             <div class="card my-3 bg-light">
                                 <a th:href="@{/admin/productos/otros/{id}(id=${producto.id})}">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="producto">
@@ -66,19 +66,14 @@
                     <aside>
                         <div class="container">
                             <h5>Filtrar:</h5>
-                            <form>
+                            <form th:action="@{/admin/productos/otros}" method="get">
                                 <div class="mb-3">
                                     <label for="orden">Ordenar por:</label>
-                                    <select class="form-select" id="orden">
+                                    <select class="form-select" id="orden" name="orden">
                                         <option value="nombre_asc">Nombre A-Z</option>
                                         <option value="precio_bajo">Precio más bajo primero</option>
                                         <option value="precio_alto">Precio más alto primero</option>
                                     </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rango">Filtrar por precio:</label>
-                                    <input type="range" class="form-range" id="rango" value="0" min="0" max="400" step="1">
-                                    <span id="valor_rango">0</span>
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Aplicar filtro</button>

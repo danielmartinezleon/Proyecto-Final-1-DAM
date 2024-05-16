@@ -53,17 +53,17 @@ public class UsuarioController {
 	
 	@GetMapping("/user/productos/melee")
     public String listarMeleeUser(Model model) {
-        List<Producto> productos = productoService.findAll();
+		List<Producto> productos = productoService
+								.mostrarProductosMelee();
         model.addAttribute("productos", productos);
-        model.addAttribute("producto", new Producto());
         return "/user/meleeuser";
     }
 	
 	@GetMapping("/user/productos/distancia")
     public String listarDistanciaUser(Model model) {
-        List<Producto> productos = productoService.findAll();
+		List<Producto> productos = productoService
+								.mostrarProductosDistancia();
         model.addAttribute("productos", productos);
-        model.addAttribute("producto", new Producto());
         return "/user/distanciauser";
     }
     
@@ -87,9 +87,9 @@ public class UsuarioController {
 	
     @GetMapping("/user/productos/cuero")
     public String listarCueroUser(Model model) {
-        List<Producto> productos = productoService.findAll();
+    	List<Producto> productos = productoService
+								.mostrarProductosCuero();
         model.addAttribute("productos", productos);
-        model.addAttribute("producto", new Producto());
         return "/user/cuerouser";
     }
 
@@ -104,9 +104,9 @@ public class UsuarioController {
     
     @GetMapping("/user/productos/metal")
     public String listarMetalUser(Model model) {
-        List<Producto> productos = productoService.findAll();
+    	List<Producto> productos = productoService
+								.mostrarProductosMetal();
         model.addAttribute("productos", productos);
-        model.addAttribute("producto", new Producto());
         return "/user/metaluser";
     }
 
@@ -121,9 +121,9 @@ public class UsuarioController {
     
     @GetMapping("/user/productos/otros")
     public String listarOtrosUser(Model model) {
-        List<Producto> productos = productoService.findAll();
+    	List<Producto> productos = productoService
+								.mostrarProductosOtros();
         model.addAttribute("productos", productos);
-        model.addAttribute("producto", new Producto());
         return "/user/otrosuser";
     }
 

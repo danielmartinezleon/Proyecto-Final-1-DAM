@@ -66,19 +66,14 @@
                     <aside>
                         <div class="container">
                             <h5>Filtrar:</h5>
-                            <form>
+                            <form th:action="@{/admin/productos/melee}" method="get">
                                 <div class="mb-3">
                                     <label for="orden">Ordenar por:</label>
-                                    <select class="form-select" id="orden">
+                                    <select class="form-select" id="orden" name="orden">
                                         <option value="nombre_asc">Nombre A-Z</option>
                                         <option value="precio_bajo">Precio más bajo primero</option>
                                         <option value="precio_alto">Precio más alto primero</option>
                                     </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rango">Filtrar por precio:</label>
-                                    <input type="range" class="form-range" id="rango" value="0" min="0" max="400" step="1">
-                                    <span id="valor_rango">0</span>
                                 </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Aplicar filtro</button>
@@ -141,10 +136,13 @@
 <script>
     let rango = document.getElementById('rango');
     let valorSpan = document.getElementById('valor_rango');
+    let precioMaximoInput = document.getElementById('precio_maximo');
 
     function actualizarValor() {
         valorSpan.textContent = rango.value;
+        precioMaximoInput.value = rango.value;
     }
+
     rango.addEventListener('input', actualizarValor);
     actualizarValor();
 

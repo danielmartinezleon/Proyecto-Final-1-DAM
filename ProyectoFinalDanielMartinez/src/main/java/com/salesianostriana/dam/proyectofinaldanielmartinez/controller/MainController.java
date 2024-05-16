@@ -33,35 +33,40 @@ public class MainController {
 	
 	@GetMapping("/melee")
     public String listarProductosMelee(Model model) {
-        List<Producto> cat = productoService.findAll();
-        List<Producto> productos = productoService.mostrarProductosMelee(cat);
+        List<Producto> productos = productoService
+        						.mostrarProductosMelee();
+        
         model.addAttribute("productos", productos);
         return "melee";
     }
 	
 	@GetMapping("/distancia")
     public String listarProductosDistancia(Model model) {
-        List<Producto> productos = productoService.findAll();
+        List<Producto> productos = productoService
+        						.mostrarProductosDistancia();
         model.addAttribute("productos", productos);
         return "distancia";
     }
 	
 	@GetMapping("/metal")
     public String listarProductosMetal(Model model) {
-        List<Producto> productos = productoService.findAll();
+		List<Producto> productos = productoService
+								.mostrarProductosMetal();
         model.addAttribute("productos", productos);
         return "metal";
     }
 	@GetMapping("/cuero")
     public String listarProductosCuero(Model model) {
-        List<Producto> productos = productoService.findAll();
+		List<Producto> productos = productoService
+								.mostrarProductosCuero();
         model.addAttribute("productos", productos);
         return "cuero";
     }
 	
 	@GetMapping("/otros")
     public String listarProductosOtros(Model model) {
-        List<Producto> productos = productoService.findAll();
+		List<Producto> productos = productoService
+								.mostrarProductosOtros();
         model.addAttribute("productos", productos);
         return "otros";
     }	
