@@ -30,6 +30,5 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
 	List<Producto> findAllByCategoriaIdOrderByPrecioDesc(Long categoriaId);
 	
-	List<Producto> findByPrecioLessThanEqual(Double precioMaximo);
-
+	List<Producto> findByNombreContainingIgnoreCase (String titulo);	
 }

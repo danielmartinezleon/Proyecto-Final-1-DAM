@@ -2,6 +2,7 @@ package com.salesianostriana.dam.proyectofinaldanielmartinez.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
@@ -57,11 +58,16 @@ public class ProductoService
     public List<Producto> ordenarProductosPorPrecioDesc(long categoriaId) {
         return repository.findAllByCategoriaIdOrderByPrecioDesc(categoriaId);
     }
-    
-    public List<Producto> filtrarProductosPorPrecioMaximo(double precioMaximo) {
-        return repository.findByPrecioLessThanEqual(precioMaximo);
-    }
 
+    public void restarStock(Long id, int cantidad) {
+		Optional<Producto> optionalProducto = this.repository.findById(id);
+		Producto producto = optionalProducto.get();
+		if (optionalProducto.isPresent()) {
+			producto.setStock(producto.getStock() - cantidad);
+		}
+	}
 	
-	
+    public List<Producto> findByTitulo (String titulo){
+		return this.repository.findByNombreContainingIgnoreCase(titulo);
+	}
 }

@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.security;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Primary
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	private final UsuarioRepository repo;
