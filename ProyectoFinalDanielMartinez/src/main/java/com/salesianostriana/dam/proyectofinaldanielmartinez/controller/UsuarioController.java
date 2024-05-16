@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
@@ -52,17 +53,57 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/user/productos/melee")
-    public String listarMeleeUser(Model model) {
-		List<Producto> productos = productoService
-								.mostrarProductosMelee();
+    public String listarMeleeUser(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosMelee = productoService.mostrarProductosMelee();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(1);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(1);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(1);
+                    break;
+                default:
+                    productos = productosMelee;
+                    break;
+            }
+        } else {
+            productos = productosMelee;
+        }
+
         model.addAttribute("productos", productos);
         return "/user/meleeuser";
     }
 	
 	@GetMapping("/user/productos/distancia")
-    public String listarDistanciaUser(Model model) {
-		List<Producto> productos = productoService
-								.mostrarProductosDistancia();
+    public String listarDistanciaUser(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosDistancia = productoService.mostrarProductosDistancia();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(2);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(2);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(2);
+                    break;
+                default:
+                    productos = productosDistancia;
+                    break;
+            }
+        } else {
+            productos = productosDistancia;
+        }
+
         model.addAttribute("productos", productos);
         return "/user/distanciauser";
     }
@@ -86,9 +127,29 @@ public class UsuarioController {
     }
 	
     @GetMapping("/user/productos/cuero")
-    public String listarCueroUser(Model model) {
-    	List<Producto> productos = productoService
-								.mostrarProductosCuero();
+    public String listarCueroUser(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosCuero = productoService.mostrarProductosCuero();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(3);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(3);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(3);
+                    break;
+                default:
+                    productos = productosCuero;
+                    break;
+            }
+        } else {
+            productos = productosCuero;
+        }
+
         model.addAttribute("productos", productos);
         return "/user/cuerouser";
     }
@@ -103,9 +164,29 @@ public class UsuarioController {
     }
     
     @GetMapping("/user/productos/metal")
-    public String listarMetalUser(Model model) {
-    	List<Producto> productos = productoService
-								.mostrarProductosMetal();
+    public String listarMetalUser(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosMetal = productoService.mostrarProductosMetal();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(4);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(4);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(4);
+                    break;
+                default:
+                    productos = productosMetal;
+                    break;
+            }
+        } else {
+            productos = productosMetal;
+        }
+
         model.addAttribute("productos", productos);
         return "/user/metaluser";
     }
@@ -120,9 +201,29 @@ public class UsuarioController {
     }
     
     @GetMapping("/user/productos/otros")
-    public String listarOtrosUser(Model model) {
-    	List<Producto> productos = productoService
-								.mostrarProductosOtros();
+    public String listarOtrosUser(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productosOtros = productoService.mostrarProductosOtros();
+        List<Producto> productos;
+
+        if (orden != null) {
+            switch (orden) {
+                case "nombre_asc":
+                    productos = productoService.ordenarProductosPorNombreAsc(5);
+                    break;
+                case "precio_bajo":
+                    productos = productoService.ordenarProductosPorPrecioAsc(5);
+                    break;
+                case "precio_alto":
+                    productos = productoService.ordenarProductosPorPrecioDesc(5);
+                    break;
+                default:
+                    productos = productosOtros;
+                    break;
+            }
+        } else {
+            productos = productosOtros;
+        }
+
         model.addAttribute("productos", productos);
         return "/user/otrosuser";
     }
