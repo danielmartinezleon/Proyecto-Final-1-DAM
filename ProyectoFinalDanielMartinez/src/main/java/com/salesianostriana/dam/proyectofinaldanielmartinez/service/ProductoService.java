@@ -25,5 +25,15 @@ public class ProductoService
         }
         return productosAleatorios;
     }
+	
+	public List<Producto> mostrarProductosMelee(List<Producto> cat){
+		
+		return repository.productosMelee(cat);
+		
+	}
 
+	
+	
+	
+	
 }

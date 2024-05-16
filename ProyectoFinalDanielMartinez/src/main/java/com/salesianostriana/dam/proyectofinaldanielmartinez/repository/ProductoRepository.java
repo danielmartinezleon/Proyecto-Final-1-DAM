@@ -9,8 +9,15 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
-	/*
-	@Query("select distinct p from Producto p where p.precio < 200")
-	List<Producto> productosMenosDeDoscientos(List<Producto> catalogo);
-	*/
+	@Query("select distinct p from Producto p where p.categoria.id = 1")
+	List<Producto> productosMelee(List<Producto> cat);
+	
+	@Query("select distinct p from Producto p where p.categoria.id = 2")
+	List<Producto> productosDistancia(List<Producto> cat);
+	
+	@Query("select distinct p from Producto p where p.categoria.id = 3")
+	List<Producto> productosCuero(List<Producto> cat);
+	
+	@Query("select distinct p from Producto p where p.categoria.id = 4")
+	List<Producto> productosMetal(List<Producto> cat);
 }
