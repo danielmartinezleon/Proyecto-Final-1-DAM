@@ -13,16 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.AdminService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.service.UsuarioService;
-
-import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -31,12 +27,6 @@ public class AdminController {
 
 	@Autowired
     private ProductoService productoService;
-	
-	@Autowired
-	private UsuarioService usuarioService;
-	
-	@Autowired
-    private HttpSession httpSession;
 	
 	@Autowired
 	private AdminService adminService;
@@ -154,6 +144,144 @@ public class AdminController {
     public String procesarDistancia(@ModelAttribute("productoEdit") Producto p) {
     	productoService.edit(p);
     	return "redirect:/admin/productos/distancia";
+    }
+    
+    @GetMapping("/admin/productos/cuero")
+    public String listarCueroAdmin(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/admin/cueroadmin";
+    }
+
+    @RequestMapping("/admin/productos/cuero/{id}")
+    public String cargarProductoCuero(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/admin/productoadmin";
+    }
+
+    @PostMapping("/admin/productos/cuero/guardarProducto")
+    public String guardarCuero(@ModelAttribute Producto producto) {
+    	productoService.save(producto);
+        return "redirect:/admin/productos/cuero";
+    }
+
+    @PostMapping("/admin/productos/cuero/eliminarProducto/{id}")
+    public String eliminarCuero(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos/cuero";
+    }
+
+    @GetMapping("/admin/productos/cuero/editar/{id}")
+	public String mostrarFormularioCuero(@PathVariable("id") long id, Model model) {
+		Optional<Producto> prod = productoService.findById(id);
+		
+		Producto editar = prod.get();
+		model.addAttribute("productoEdit", editar);
+		
+		return "/admin/editcuero";
+		
+	}
+    
+    @PostMapping("/admin/productos/cuero/editar/submit")
+    public String procesarCuero(@ModelAttribute("productoEdit") Producto p) {
+    	productoService.edit(p);
+    	return "redirect:/admin/productos/cuero";
+    }
+    
+    @GetMapping("/admin/productos/metal")
+    public String listarMetalAdmin(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/admin/metaladmin";
+    }
+
+    @RequestMapping("/admin/productos/metal/{id}")
+    public String cargarProductoMetal(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/admin/productoadmin";
+    }
+
+    @PostMapping("/admin/productos/metal/guardarProducto")
+    public String guardarMetal(@ModelAttribute Producto producto) {
+    	productoService.save(producto);
+        return "redirect:/admin/productos/metal";
+    }
+
+    @PostMapping("/admin/productos/metal/eliminarProducto/{id}")
+    public String eliminarMetal(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos/metal";
+    }
+
+    @GetMapping("/admin/productos/metal/editar/{id}")
+	public String mostrarFormularioMetal(@PathVariable("id") long id, Model model) {
+		Optional<Producto> prod = productoService.findById(id);
+		
+		Producto editar = prod.get();
+		model.addAttribute("productoEdit", editar);
+		
+		return "/admin/editmetal";
+		
+	}
+    
+    @PostMapping("/admin/productos/metal/editar/submit")
+    public String procesarMetal(@ModelAttribute("productoEdit") Producto p) {
+    	productoService.edit(p);
+    	return "redirect:/admin/productos/metal";
+    }
+    
+    @GetMapping("/admin/productos/otros")
+    public String listarOtrosAdmin(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/admin/otrosadmin";
+    }
+
+    @RequestMapping("/admin/productos/otros/{id}")
+    public String cargarProductoOtros(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/admin/productoadmin";
+    }
+
+    @PostMapping("/admin/productos/otros/guardarProducto")
+    public String guardarOtros(@ModelAttribute Producto producto) {
+    	productoService.save(producto);
+        return "redirect:/admin/productos/otros";
+    }
+
+    @PostMapping("/admin/productos/otros/eliminarProducto/{id}")
+    public String eliminarOtros(@PathVariable("id") Long id) {
+        productoService.deleteById(id);
+        return "redirect:/admin/productos/otros";
+    }
+
+    @GetMapping("/admin/productos/otros/editar/{id}")
+	public String mostrarFormularioOtros(@PathVariable("id") long id, Model model) {
+		Optional<Producto> prod = productoService.findById(id);
+		
+		Producto editar = prod.get();
+		model.addAttribute("productoEdit", editar);
+		
+		return "/admin/editotros";
+		
+	}
+    
+    @PostMapping("/admin/productos/otros/editar/submit")
+    public String procesarOtros(@ModelAttribute("productoEdit") Producto p) {
+    	productoService.edit(p);
+    	return "redirect:/admin/productos/otros";
     }
 
     @GetMapping("/admin/cuero")

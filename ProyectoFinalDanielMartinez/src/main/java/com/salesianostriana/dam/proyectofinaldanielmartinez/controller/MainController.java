@@ -45,26 +45,25 @@ public class MainController {
         return "distancia";
     }
 	
-	@GetMapping("/producto")
-	public String producto() {
-		return "producto";
-		
-	}
-	
-	
+	@GetMapping("/metal")
+    public String listarProductosMetal(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        return "metal";
+    }
 	@GetMapping("/cuero")
-	public String cuero() {
-		return "cuero";
-		
-	}
+    public String listarProductosCuero(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        return "cuero";
+    }
 	
-		
-	@GetMapping("/armadura1")
-	public String armadura1() {
-		return "armadura1";
-		
-	}
-	
+	@GetMapping("/otros")
+    public String listarProductosOtros(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        return "otros";
+    }	
 	
 	
 }

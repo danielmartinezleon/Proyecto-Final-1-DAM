@@ -7,16 +7,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <h3 class="mt-5 text-center">ARMADURAS DE CUERO</h3>
+                    <h3 class="mt-5 text-center">OTROS</h3>
                     <div class="text-center">
 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
 							<i class="bi bi-bag-plus-fill"></i> Agregar Producto
 						</button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                        <div th:each="producto, iterStat : ${productos}" class="col-md-3" th:if="${producto.categoria.id == 3}">
+                        <div th:each="producto, iterStat : ${productos}" class="col-md-3" th:if="${producto.categoria.id == 5}">
                             <div class="card my-3 bg-light">
-                                <a th:href="@{/admin/productos/cuero/{id}(id=${producto.id})}">
+                                <a th:href="@{/admin/productos/otros/{id}(id=${producto.id})}">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="producto">
                                 </a>
                                 <div class="card-body">
@@ -41,7 +41,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                         <!-- Formulario de eliminación -->
-                                                        <form th:action="@{/admin/productos/cuero/eliminarProducto/{id}(id=${producto.id})}" method="post">
+                                                        <form th:action="@{/admin/productos/otros/eliminarProducto/{id}(id=${producto.id})}" method="post">
                                                             <input type="hidden" name="_method" value="POST" />
                                                             <button type="submit" class="btn btn-danger">Eliminar</button>
                                                         </form>
@@ -49,7 +49,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a th:href="@{/admin/productos/cuero/editar/{id}(id=${producto.id})}">
+                                        <a th:href="@{/admin/productos/otros/editar/{id}(id=${producto.id})}">
                                             <button type="button" class="btn btn-primary">Editar</button>
                                         </a>
                                     </div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="modal-body">
                     
-                <form th:action="@{/admin/productos/cuero/guardarProducto}" th:object="${producto}" method="post">
+                <form th:action="@{/admin/productos/otros/guardarProducto}" th:object="${producto}" method="post">
                 
                     <div class="mb-3">
                         <label for="nombre">Nombre:</label>
@@ -124,7 +124,7 @@
                         <label for="imagen">Imagen (URL):</label>
                         <input type="text" class="form-control" id="imagen" name="imagen" th:field="*{imagen}" placeholder="Ingrese la URL de la imagen">
                     </div>
-					<input type="hidden" name="categoria.id" value="3" />
+					<input type="hidden" name="categoria.id" value="5" />
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar Producto</button>

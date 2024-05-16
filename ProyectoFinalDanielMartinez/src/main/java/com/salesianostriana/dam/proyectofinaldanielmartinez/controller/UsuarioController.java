@@ -85,17 +85,56 @@ public class UsuarioController {
         return "/user/productouser";
     }
 	
-	@GetMapping("/user/cuero")
-	public String cuerouser() {
-		return "/user/cuerouser";
-		
-	}
-	
-	@GetMapping("/user/armadura1")
-	public String armadura1user() {
-		return "/user/armadura1user";
-		
-	}
+    @GetMapping("/user/productos/cuero")
+    public String listarCueroUser(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/user/cuerouser";
+    }
+
+    @RequestMapping("/user/productos/cuero/{id}")
+    public String cargarProductoCuero(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
+    
+    @GetMapping("/user/productos/metal")
+    public String listarMetalUser(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/user/metaluser";
+    }
+
+    @RequestMapping("/user/productos/metal/{id}")
+    public String cargarProductoMetal(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
+    
+    @GetMapping("/user/productos/otros")
+    public String listarOtrosUser(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("producto", new Producto());
+        return "/user/otrosuser";
+    }
+
+    @RequestMapping("/user/productos/otros/{id}")
+    public String cargarProductoOtros(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
 	
 	@GetMapping("/user/profile")
     public String userProfile(Model model, @AuthenticationPrincipal Cliente cliente) {
