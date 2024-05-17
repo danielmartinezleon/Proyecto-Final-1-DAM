@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head::head}"></head>
 <body class="d-flex flex-column vh-100">
-	<header th:replace="~{fragments/headeruser::cabezauser}"></header>
+    <header th:replace="~{fragments/headeruser::cabezauser}"></header>
     <main class="flex-grow-1" style="margin-top: 56px;">
         <div class="container">
             <h3 class="mt-5">Carro</h3>
@@ -15,52 +15,30 @@
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Acciones</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row"><img src="#" alt="a" style="height: 64px;"></th>
-                            <td>Producto 1</td>
+                        <tr th:each="lineaVenta : ${carrito.lineas}">
+                            <th scope="row"><img th:src="@{${lineaVenta.producto.imagen}}" alt="Imagen del producto" style="height: 64px;"></th>
+                            <td th:text="${lineaVenta.producto.nombre}">Nombre del producto</td>
                             <td>
-                                <input value="1" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
+                                <input th:value="${lineaVenta.cantidad}" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
                             </td>
-                            <td>0,00€</td>
-                            <td><button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><img src="#" alt="a" style="height: 64px;"></th>
-                            <td>Producto 2</td>
+                            <td th:text="${#numbers.formatDecimal(lineaVenta.getTotalLinea(), 001, 2)} + '€'">0,00€</td>
                             <td>
-                                <input value="1" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
+                                <a th:href="@{/carrito/eliminar/{id}(id=${lineaVenta.id})}">
+                                    <button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button>
+                                </a>
                             </td>
-                            <td>0,00€</td>
-                            <td><button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
-                            <th scope="row"><img src="#" alt="a" style="height: 64px;"></th>
-                            <td>Producto 3</td>
+                            <td colspan="4"></td>
+                            <td class="fw-bold">Total:</td>
+                            <td class="fw-bold" th:text="${#numbers.formatDecimal(carrito.importeTotal, 001, 2)} + '€'">0,00€</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
                             <td>
-                                <input value="1" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
-                            </td>
-                            <td>0,00€</td>
-                            <td><button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"></td>
-                            <td class="fw-bold d-none d-sm-table-cell">Total:</td>
-                            <td class="fw-bold d-none d-sm-table-cell">0,00€</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"></td>
-                            <td colspan="2" class="d-none d-sm-table-cell">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Código promocional">
                                     <button class="btn btn-primary" type="button">Canjear</button>
@@ -70,14 +48,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-block d-sm-none">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Código promocional">
-                    <button class="btn btn-primary mt-2" type="button">Canjear</button>
-                </div>
-                <p class="fw-bold mt-2">Total: 0,00€</p>
-            </div>
-            <div class="text-end d-grid d-md-block">
+            <div class="text-end">
                 <button class="btn btn-success" type="button">Proceder con el pago</button>
             </div>
         </div>

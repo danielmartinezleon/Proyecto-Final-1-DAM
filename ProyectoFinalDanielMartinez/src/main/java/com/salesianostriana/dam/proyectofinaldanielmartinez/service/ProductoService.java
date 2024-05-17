@@ -59,14 +59,6 @@ public class ProductoService
         return repository.findAllByCategoriaIdOrderByPrecioDesc(categoriaId);
     }
 
-    public void restarStock(Long id, int cantidad) {
-		Optional<Producto> optionalProducto = this.repository.findById(id);
-		Producto producto = optionalProducto.get();
-		if (optionalProducto.isPresent()) {
-			producto.setStock(producto.getStock() - cantidad);
-		}
-	}
-	
     public List<Producto> findByTitulo (String titulo){
 		return this.repository.findByNombreContainingIgnoreCase(titulo);
 	}

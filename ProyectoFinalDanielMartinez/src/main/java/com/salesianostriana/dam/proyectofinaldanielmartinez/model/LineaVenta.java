@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.model;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -9,15 +10,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class LineaVenta {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 	
 	//private double pvp;
 	
@@ -34,5 +37,6 @@ public class LineaVenta {
 	public double getTotalLinea() {
 		return producto.getPrecio() * cantidad;
 	}
+	
 
 }

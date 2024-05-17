@@ -21,11 +21,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Venta {
 
 	@Id
@@ -39,7 +42,7 @@ public class Venta {
 	
 	private double gastosEnvio;
 	
-	private boolean finalizada;
+	private boolean abierta;
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
@@ -53,14 +56,45 @@ public class Venta {
 	@Builder.Default
 	private List<LineaVenta> lineas = new ArrayList<>();
 	
-	public void addLineaVenta(LineaVenta lv) {
-		this.lineas.add(lv);
-		lv.setVenta(this);
+	public void addVentaCliente(Cliente cliente) {
+		this.cliente = cliente;
+		cliente.getVentas().add(this);
 	}
 	
-	public void removeLineaVenta(LineaVenta lv) {
-		this.lineas.remove(lv);
-		lv.setVenta(null);
+	public void removeLineaVenta(Cliente cliente) {
+		this.cliente = null;
+		cliente.getVentas().remove(this);
+	}
+	
+	public void addLineaVenta(LineaVenta lineaVenta) {
+		lineaVenta.setId(generarIdLinea());
+		lineaVenta.setVenta(this);
+		this.getLineas().add(lineaVenta);
+	}
+	
+	public void removeLineaVenta(LineaVenta lineaVenta) {
+		lineaVenta.setVenta(null);
+		this.getLineas().remove(lineaVenta);
+	}
+	
+	public void removeLineaVenta(long lineaVenta_id) {
+		Optional<LineaVenta> lv = lineas.stream()
+				.filter(x -> x.getId()==this.id && 
+				x.getId()==lineaVenta_id)
+				.findFirst();
+		if(lv.isPresent()) {
+			removeLineaVenta(lv.get());
+		}
+	}
+		
+	
+	public long generarIdLinea() {
+		if(!this.lineas.isEmpty()) {
+			return this.lineas.stream()
+					.count() + 1l;
+		}else {
+			return 1l;
+		}
 	}
 	
 }
