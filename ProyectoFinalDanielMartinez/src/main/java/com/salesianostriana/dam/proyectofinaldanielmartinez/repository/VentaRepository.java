@@ -8,6 +8,6 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 
 public interface VentaRepository extends JpaRepository<Venta, Long>{
 	
-	boolean existsByClienteAndLineas_Producto(Cliente cliente, Producto producto);
+	
 
 }

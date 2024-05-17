@@ -23,7 +23,7 @@
                                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                                     <p class="precio" th:text="${#numbers.formatDecimal(producto.precio, 001, 2)} + '€'"></p>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#confirmarEliminarProductoModal_' + ${iterStat.index}">Eliminar</button>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#confirmarEliminarProductoModal_' + ${iterStat.index}">&emsp;<i class="bi bi-trash3-fill"></i>&emsp;</button>
                                         <div class="modal fade" th:id="'confirmarEliminarProductoModal_' + ${iterStat.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -50,7 +50,7 @@
                                             </div>
                                         </div>
                                         <a th:href="@{/admin/productos/metal/editar/{id}(id=${producto.id})}">
-                                            <button type="button" class="btn btn-primary">Editar</button>
+                                            <button type="button" class="btn btn-primary">&emsp;<i class="bi bi-pencil-fill"></i>&emsp;</button>
                                         </a>
                                     </div>
                                 </div>

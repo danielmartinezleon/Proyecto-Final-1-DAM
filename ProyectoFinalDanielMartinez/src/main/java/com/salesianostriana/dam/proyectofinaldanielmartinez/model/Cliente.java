@@ -30,4 +30,13 @@ public class Cliente extends Usuario {
 	
     private static final long serialVersionUID = 1L;
 
+    public void addVenta(Venta lv) {
+		this.ventas.add(lv);
+		lv.setCliente(this);
+	}
+	
+	public void removeVenta(Venta lv) {
+		this.ventas.remove(lv);
+		lv.setCliente(null);
+	}
 }
