@@ -44,8 +44,8 @@
                         </li>
                     </ul>
                     
-                    <form class="d-flex mx-auto">
-                        <input class="form-control me-2" type="text" placeholder="Buscar">
+                    <form class="d-flex mx-auto" th:action="@{/user/busqueda}" method="get">
+                        <input class="form-control me-2" type="text" name="nombre" placeholder="Buscar">
                         <button class="btn btn-primary" type="button">Buscar</button>
                     </form>
                     <div class="dropdown">

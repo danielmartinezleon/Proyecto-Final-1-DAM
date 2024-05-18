@@ -59,7 +59,7 @@ public class ProductoService
         return repository.findAllByCategoriaIdOrderByPrecioDesc(categoriaId);
     }
 
-    public List<Producto> findByTitulo (String titulo){
-		return this.repository.findByNombreContainingIgnoreCase(titulo);
+    public List<Producto> findByNombre (String titulo){
+		return repository.findByNombreContainingIgnoreCase(titulo);
 	}
 }

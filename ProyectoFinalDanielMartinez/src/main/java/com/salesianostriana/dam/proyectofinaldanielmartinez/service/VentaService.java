@@ -96,17 +96,4 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
             ventaRepository.save(venta);
         }
     }
-
-
-    public Venta obtenerCarritoDelClientePrueba(Cliente cliente) {
-        List<Venta> carritos = ventaRepository.findByClienteAndAbiertaTrue(cliente);
-        if (!carritos.isEmpty()) {
-            return carritos.get(0);
-        } else {
-            Venta nuevoCarrito = new Venta();
-            nuevoCarrito.setCliente(cliente);
-            nuevoCarrito.setAbierta(true);
-            return ventaRepository.save(nuevoCarrito);
-        }
-    }
 }
