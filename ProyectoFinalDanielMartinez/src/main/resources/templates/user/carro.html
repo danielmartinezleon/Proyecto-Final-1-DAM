@@ -17,39 +17,39 @@
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr th:each="lineaVenta : ${carrito.lineas}">
-                            <th scope="row"><img th:src="@{${lineaVenta.producto.imagen}}" alt="Imagen del producto" style="height: 64px;"></th>
-                            <td th:text="${lineaVenta.producto.nombre}">Nombre del producto</td>
+                    <tbody th:each="productoLinea : ${lineasMap.entrySet()}">
+                        <tr>
+                            <td><img th:src="${#strings.isEmpty(productoLinea.key.imagen)} ? 'http://placehold.it/350x260' : ${productoLinea.key.imagen}" width="100px"></td>
+                            <td th:text="${productoLinea.key.nombre}">Nombre del producto</td>
                             <td>
-                                <input th:value="${lineaVenta.cantidad}" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
+                                <input th:value="${productoLinea.value.cantidad}" min="1" max="10" type="number" id="Cantidad" class="form-control"/>
                             </td>
-                            <td th:text="${#numbers.formatDecimal(lineaVenta.getTotalLinea(), 001, 2)} + '€'">0,00€</td>
+                            <td th:text="${#numbers.formatDecimal(productoLinea.value.getTotalLinea(), 0, 2)} + '€'">0,00€</td>
                             <td>
-                                <a th:href="@{/carrito/eliminar/{id}(id=${lineaVenta.id})}">
+                                <a th:href="@{/carrito/eliminar/{id}(id=${productoLinea.key.id})}">
                                     <button class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</button>
                                 </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"></td>
-                            <td class="fw-bold">Total:</td>
-                            <td class="fw-bold" th:text="${#numbers.formatDecimal(carrito.importeTotal, 001, 2)} + '€'">0,00€</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"></td>
-                            <td>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Código promocional">
-                                    <button class="btn btn-primary" type="button">Canjear</button>
-                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="text-end">
-                <button class="btn btn-success" type="button">Proceder con el pago</button>
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Código promocional">
+                        <button class="btn btn-primary" type="button">Canjear</button>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <div class="fw-bold">Total:</div>
+                    <div class="fw-bold" th:text="${#numbers.formatDecimal(carrito.importeTotal, 0, 2)} + '€'">0,00€</div>
+                </div>
+            </div>
+            <div class="text-end mt-3">
+                <form th:action="@{/carrito/finalizar}" method="post">
+                    <button class="btn btn-success" type="submit">Proceder con el pago</button>
+                </form>
             </div>
         </div>
     </main>

@@ -67,10 +67,13 @@ public class Venta {
 	}
 	
 	public void addLineaVenta(LineaVenta lineaVenta) {
-		lineaVenta.setId(generarIdLinea());
-		lineaVenta.setVenta(this);
-		this.getLineas().add(lineaVenta);
+	    if (lineas == null) {
+	        lineas = new ArrayList<>();
+	    }
+	    lineas.add(lineaVenta);
+	    lineaVenta.setVenta(this);
 	}
+
 	
 	public void removeLineaVenta(LineaVenta lineaVenta) {
 		lineaVenta.setVenta(null);
@@ -84,16 +87,6 @@ public class Venta {
 				.findFirst();
 		if(lv.isPresent()) {
 			removeLineaVenta(lv.get());
-		}
-	}
-		
-	
-	public long generarIdLinea() {
-		if(!this.lineas.isEmpty()) {
-			return this.lineas.stream()
-					.count() + 1l;
-		}else {
-			return 1l;
 		}
 	}
 	

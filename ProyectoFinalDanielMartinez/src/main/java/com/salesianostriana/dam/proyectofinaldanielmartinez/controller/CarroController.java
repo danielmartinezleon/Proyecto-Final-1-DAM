@@ -1,5 +1,8 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.LineaVenta;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ClienteService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
@@ -41,15 +46,42 @@ public class CarroController {
         return "redirect:/user/carro";
     }
 
-    @GetMapping("/user/carro")
-    public String verCarrito(@AuthenticationPrincipal Cliente logeado, Model model) {
-        Cliente cliente = clienteService.obtenerClienteActual(logeado);
+	@GetMapping("/user/carro")
+	public String verCarrito(@AuthenticationPrincipal Cliente logeado, Model model) {
+	    Cliente cliente = clienteService.obtenerClienteActual(logeado);
+	    if (cliente != null) {
+	        Venta carrito = ventaService.obtenerCarritoDelCliente(cliente);
+	        
+	        Map<Producto, LineaVenta> lineasMap = new LinkedHashMap<>();
+	        for (LineaVenta linea : carrito.getLineas()) {
+	            lineasMap.put(linea.getProducto(), linea);
+	        }
+	        
+	        model.addAttribute("carrito", carrito);
+	        model.addAttribute("lineasMap", lineasMap);
+	    }
+	    return "/user/carro";
+	}
+	
+	@GetMapping("/carrito/eliminar/{id}")
+    public String eliminarProductoDelCarrito(@AuthenticationPrincipal Cliente userDetails, @PathVariable Long id) {
+        Cliente cliente = clienteService.obtenerClienteActual(userDetails);
         if (cliente != null) {
-            Venta carrito = ventaService.obtenerCarritoDelCliente(cliente);
-            model.addAttribute("carrito", carrito);
+            ventaService.eliminarProductoDelCarrito(cliente, id);
         }
-        return "/user/carro";
+        return "redirect:/user/carro";
     }
+
+    @PostMapping("/carrito/finalizar")
+    public String finalizarVenta(@AuthenticationPrincipal Cliente userDetails) {
+        Cliente cliente = clienteService.obtenerClienteActual(userDetails);
+        if (cliente != null) {
+            ventaService.finalizarVenta(cliente);
+        }
+        return "redirect:/user/carro";
+    }
+	
+
 
 	
 }

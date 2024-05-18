@@ -53,3 +53,4 @@ INSERT INTO Producto (nombre, descripcion, stock, precio, imagen, categoria_id) 
 
 INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('admin', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Falsa 123', 'ADMIN');
 INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('user', 'Luismi', 'Lopez', 'luismi.lopez@triana.salesianos.edu', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 434', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('nlm2000', 'Nydia', 'Lopez', 'nydialopez@gmail.com', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Inventada 10', 'USER');
