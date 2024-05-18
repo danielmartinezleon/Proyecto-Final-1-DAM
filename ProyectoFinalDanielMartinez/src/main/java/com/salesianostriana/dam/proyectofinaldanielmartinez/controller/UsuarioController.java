@@ -248,7 +248,23 @@ public class UsuarioController {
     	
     }
     
-    
+    @GetMapping("/user/busqueda")
+    public String buscarProductos(String nombre, Model model) {
+    	List<Producto> buscados = productoService.findByNombre(nombre);
+    	
+    	if(!buscados.isEmpty()) {
+    		model.addAttribute("productos", buscados);
+    	
+    		return "/user/busqueda";
+    	
+    	}else {
+    		model.addAttribute("productos", new ArrayList<>());
+            model.addAttribute("mensaje", "No se ha encontrado ningún producto");
+            
+            return "/user/busqueda";
+    	}
+    	
+    }
     
     
     
