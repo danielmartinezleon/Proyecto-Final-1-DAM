@@ -82,5 +82,17 @@ public class CarroController {
         return "redirect:/user/carro";
     }
     
+    @PostMapping("/user/carrito/aplicar-codigo")
+    public String aplicarCodigo(@AuthenticationPrincipal Cliente logeado, @RequestParam("codigo") String codigo, Model model) {
+        Cliente cliente = clienteService.obtenerClienteActual(logeado);
+        if (cliente != null) {
+            ventaService.aplicarCodigo(cliente, codigo);
+            model.addAttribute("mensaje", "Código promocional aplicado correctamente!");
+        } else {
+            model.addAttribute("mensaje", "Código promocional inválido.");
+        }
+        
+        return "redirect:/user/carro";
+    }
 	
 }

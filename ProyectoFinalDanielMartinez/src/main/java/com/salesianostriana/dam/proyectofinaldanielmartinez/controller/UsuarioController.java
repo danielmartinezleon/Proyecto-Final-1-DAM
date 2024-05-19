@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Cliente;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ClienteService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.VentaService;
 
 
 @Controller
@@ -32,6 +34,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private VentaService ventaService;
 	
 	
 	@Autowired
@@ -255,18 +260,43 @@ public class UsuarioController {
     	if(!buscados.isEmpty()) {
     		model.addAttribute("productos", buscados);
     	
-    		return "/user/busqueda";
+    		return "/user/busquedauser";
     	
     	}else {
     		model.addAttribute("productos", new ArrayList<>());
             model.addAttribute("mensaje", "No se ha encontrado ningún producto");
             
-            return "/user/busqueda";
+            return "/user/busquedauser";
     	}
     	
     }
     
+    @GetMapping("/user/productos/busqueda/{id}")
+    public String cargarProductoBusqueda(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
     
+    @GetMapping("/user/mis-pedidos")
+    public String verMisPedidos(@AuthenticationPrincipal Cliente logeado, Model model) {
+        Cliente cliente = clienteService.obtenerClienteActual(logeado);
+        if (cliente != null) {
+            List<Venta> pedidosFinalizados = ventaService.findByClienteAndCerrada(cliente);
+            model.addAttribute("pedidos", pedidosFinalizados);
+        }
+        return "/user/mis-pedidos";
+    }
     
+    @GetMapping("/user/pedidos/{id}")
+    public String verDetallesPedido(@PathVariable Long id, Model model) {
+        Venta pedido = ventaService.findById(id)
+                                   .orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado: " + id));
+        model.addAttribute("pedido", pedido);
+        return "user/detallesPedido";
+    }
+
 }
 

@@ -1,11 +1,14 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
@@ -170,6 +173,43 @@ public class MainController {
         model.addAttribute("productos", productos);
         return "otros";
     }	
+	
+	@GetMapping("/quienessomos")
+	public String quienesSomos() {
+		return "quienessomos";
+	}
+	
+	@GetMapping("/avisoslegales")
+	public String avisosLegales() {
+		return "avisoslegales";
+	}
+	
+	@GetMapping("/busqueda")
+    public String buscarProductos(String nombre, Model model) {
+    	List<Producto> buscados = productoService.findByNombre(nombre);
+    	
+    	if(!buscados.isEmpty()) {
+    		model.addAttribute("productos", buscados);
+    	
+    		return "/busqueda";
+    	
+    	}else {
+    		model.addAttribute("productos", new ArrayList<>());
+            model.addAttribute("mensaje", "No se ha encontrado ningún producto");
+            
+            return "/busqueda";
+    	}
+    	
+    }
+	
+	@GetMapping("/busqueda/{id}")
+    public String cargarProductoBusqueda(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/producto";
+    }
 	
 	
 }

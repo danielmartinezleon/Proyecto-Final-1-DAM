@@ -320,6 +320,21 @@ public class AdminController {
 		
 	}
     
+    @GetMapping("/admin/descuento")
+    public String abrirDescuentos(Model model, @RequestParam(name = "orden", required = false) String orden) {
+    	List<Producto> productos = productoService.findAll();
+    	model.addAttribute("productos", productos);
+    	
+    	return "/admin/descuento";
+    }
+    
+    @GetMapping("/admin/descuento/{id}")
+    public String formDescuento(@PathVariable("id") long id, Model model) {
+    	Optional<Producto> prod = productoService.findById(id);
+    	
+    	return "";
+    }
+    
     @PostMapping("/admin/productos/metal/editar/submit")
     public String procesarMetal(@ModelAttribute("productoEdit") Producto p) {
     	productoService.edit(p);

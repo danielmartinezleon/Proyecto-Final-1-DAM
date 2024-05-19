@@ -41,10 +41,22 @@
 	                                Otros
 	                            </a>
 	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link text-white" th:href="@{/quienessomos}">
+	                                <img src="../../static/img/quienes-somos.png" th:src="@{/img/quienes-somos.png}" alt="Quienes Somos" class="me-1">
+	                                Quienes Somos
+	                            </a>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link text-white" th:href="@{/avisoslegales}">
+	                                <img src="../../static/img/avisos-legales.png" th:src="@{/img/avisos-legales.png}" alt="Avisos Legales" class="me-1">
+	                                Avisos Legales
+	                            </a>
+	                        </li>
 	                    </ul>
 	                    
-	                    <form class="d-flex mx-auto">
-	                        <input class="form-control me-2" type="text" placeholder="Buscar">
+	                    <form class="d-flex mx-auto" th:action="@{/busqueda}" method="get">
+	                        <input class="form-control me-2" name="nombre" type="text" placeholder="Buscar">
 	                        <button class="btn btn-primary" type="button">Buscar</button>
 	                    </form>
 	                    <a class="btn btn-light ms-2" th:href="@{/login}" >LOGIN</a>

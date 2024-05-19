@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.proyectofinaldanielmartinez.service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
 
     @Autowired
     private ProductoService productoService;
+    
+    private Map<Long, Boolean> codigoUsadoMap = new HashMap<>();
 
     public List<Venta> findByCliente(Cliente cliente) {
         return ventaRepository.buscarClienteYCerrada(cliente);
@@ -62,7 +66,7 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
                     carritoNuevo.setCliente(cliente);
                     carritoNuevo.setAbierta(true);
                     carritoNuevo.setFecha(LocalDate.now());
-                    carritoNuevo.setGastosEnvio(0.0);
+                    carritoNuevo.setGastosEnvio(14.99);
                     return ventaRepository.save(carritoNuevo);
                 });
     }
@@ -77,8 +81,32 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
     public void finalizarVenta(Cliente cliente) {
         Venta venta = obtenerCarritoDelCliente(cliente);
         venta.setAbierta(false);
+        if(venta.getImporteTotal() < 500) {
+        	venta.setImporteTotal(venta.getImporteTotal()+venta.getGastosEnvio());
+        }else {
+        	venta.setGastosEnvio(0.00);
+        }
+        
         ventaRepository.save(venta);
     }
+    
+    public void aplicarCodigo(Cliente cliente, String codigo) {
+        Venta venta = obtenerCarritoDelCliente(cliente);
+        double descuento = 0.0;
+        
+        if ("DESCUENTO15".equals(codigo) && !codigoUsadoMap.getOrDefault(cliente.getId(), false)) {
+            descuento = (venta.getImporteTotal() * 15) / 100;
+            venta.setImporteTotal(venta.getImporteTotal() - descuento);
+            codigoUsadoMap.put(cliente.getId(), true);
+            ventaRepository.save(venta);
+        }else if ("DESCUENTO30".equals(codigo) && !codigoUsadoMap.getOrDefault(cliente.getId(), false)) {
+            descuento = (venta.getImporteTotal() * 30) / 100;
+            venta.setImporteTotal(venta.getImporteTotal() - descuento);
+            codigoUsadoMap.put(cliente.getId(), true);
+            ventaRepository.save(venta);
+        }
+    }
+
     
     public void eliminarProductoDelCarrito(Cliente cliente, Long productoId) {
         Venta venta = obtenerCarritoDelCliente(cliente);
@@ -95,5 +123,9 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
             venta.setImporteTotal(calcularTotal(venta));
             ventaRepository.save(venta);
         }
+    }
+    
+    public List<Venta> findByClienteAndCerrada(Cliente cliente) {
+        return ventaRepository.buscarClienteYCerrada(cliente);
     }
 }

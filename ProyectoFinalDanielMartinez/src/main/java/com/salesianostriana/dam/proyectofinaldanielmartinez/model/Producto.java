@@ -33,6 +33,8 @@ public class Producto {
     
     private String imagen;
     
+    private boolean descuento;
+    
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     @ToString.Exclude
