@@ -52,11 +52,11 @@ INSERT INTO Producto (descuento, nombre, descripcion, stock, precio, imagen, cat
 
 
 INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('admin', 'Angel', 'Naranjo', 'angel.naranjo@triana.salesianos.edu', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Falsa 123', 'ADMIN');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('user', 'Luismi', 'Lopez', 'luismi.lopez@triana.salesianos.edu', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 434', 'USER');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('anagar', 'Ana', 'García', 'ana.garcia@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Principal 123', 'USER');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('davidmar', 'David', 'Martínez', 'david.martinez@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Avenida Central 456', 'USER');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('elenalo', 'Elena', 'López', 'elena.lopez@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Plaza Mayor 789', 'USER');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('dml1999', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 13', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('user', 'Luismi', 'Lopez', 'luismi.lopez@triana.salesianos.edu', '{bcrypt}$2a$10$bofV6kNXT3YhHSv.XaW9neIjKIes8QbjSRyPmSV2p/jIzf2bjppRi', 'Calle Falsa 434', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('anagar', 'Ana', 'García', 'ana.garcia@gmail.com', '{bcrypt}$2a$10$bofV6kNXT3YhHSv.XaW9neIjKIes8QbjSRyPmSV2p/jIzf2bjppRi', 'Calle Principal 123', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('davidmar', 'David', 'Martínez', 'david.martinez@gmail.com', '{bcrypt}$2a$10$bofV6kNXT3YhHSv.XaW9neIjKIes8QbjSRyPmSV2p/jIzf2bjppRi', 'Avenida Central 456', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('elenalo', 'Elena', 'López', 'elena.lopez@gmail.com', '{bcrypt}$2a$10$bofV6kNXT3YhHSv.XaW9neIjKIes8QbjSRyPmSV2p/jIzf2bjppRi', 'Plaza Mayor 789', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('dml1999', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$bofV6kNXT3YhHSv.XaW9neIjKIes8QbjSRyPmSV2p/jIzf2bjppRi', 'Calle Falsa 13', 'USER');
 
 
 INSERT INTO venta (abierta, cliente_id, fecha, gastos_envio, importe_total) VALUES (false, (SELECT id FROM Usuario WHERE username = 'dml1999'), '2024-05-20', 14.99, 422.70);
