@@ -20,15 +20,12 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.service.base.BaseSer
 public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> {
 
     @Autowired
-    private VentaRepository ventaRepository;
-
-    @Autowired
-    private ProductoService productoService;
+    ProductoService productoService;
     
     private Map<Long, Boolean> codigoUsadoMap = new HashMap<>();
 
     public List<Venta> findByCliente(Cliente cliente) {
-        return ventaRepository.buscarClienteYCerrada(cliente);
+        return repository.buscarClienteYCerrada(cliente);
     }
 
     public void agregarProductoAlCarrito(Cliente cliente, Long productoId, int cantidad) {
@@ -52,12 +49,12 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
         }
 
         venta.setImporteTotal(calcularTotal(venta));
-        ventaRepository.save(venta);
+        repository.save(venta);
     }
 
 
     public Venta obtenerCarritoDelCliente(Cliente cliente) {
-        List<Venta> ventasAbiertas = ventaRepository.buscarVentasAbiertasPorCliente(cliente);
+        List<Venta> ventasAbiertas = repository.buscarVentasAbiertasPorCliente(cliente);
         
         return ventasAbiertas.stream()
                 .findFirst()
@@ -67,7 +64,7 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
                     carritoNuevo.setAbierta(true);
                     carritoNuevo.setFecha(LocalDate.now());
                     carritoNuevo.setGastosEnvio(14.99);
-                    return ventaRepository.save(carritoNuevo);
+                    return repository.save(carritoNuevo);
                 });
     }
 
@@ -87,7 +84,7 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
         	venta.setGastosEnvio(0.00);
         }
         
-        ventaRepository.save(venta);
+        repository.save(venta);
     }
     
     public void aplicarCodigo(Cliente cliente, String codigo) {
@@ -98,12 +95,12 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
             descuento = (venta.getImporteTotal() * 15) / 100;
             venta.setImporteTotal(venta.getImporteTotal() - descuento);
             codigoUsadoMap.put(cliente.getId(), true);
-            ventaRepository.save(venta);
+            repository.save(venta);
         }else if ("DESCUENTO30".equals(codigo) && !codigoUsadoMap.getOrDefault(cliente.getId(), false)) {
             descuento = (venta.getImporteTotal() * 30) / 100;
             venta.setImporteTotal(venta.getImporteTotal() - descuento);
             codigoUsadoMap.put(cliente.getId(), true);
-            ventaRepository.save(venta);
+            repository.save(venta);
         }
     }
 
@@ -121,11 +118,15 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
             venta.getLineas().remove(lineaVenta);
             
             venta.setImporteTotal(calcularTotal(venta));
-            ventaRepository.save(venta);
+            repository.save(venta);
         }
     }
     
     public List<Venta> findByClienteAndCerrada(Cliente cliente) {
-        return ventaRepository.buscarClienteYCerrada(cliente);
+        return repository.buscarClienteYCerrada(cliente);
+    }
+    
+    public List<Venta> findVentasByMonthAndYear(int year, int month) {
+        return repository.findByMonthAndYear(year, month);
     }
 }

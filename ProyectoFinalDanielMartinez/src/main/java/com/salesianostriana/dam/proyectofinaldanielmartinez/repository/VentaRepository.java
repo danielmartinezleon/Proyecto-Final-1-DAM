@@ -26,4 +26,8 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
     List<Venta> buscarVentasAbiertasPorCliente(Cliente cliente);
 	
 	List<Venta> findByClienteAndAbiertaTrue(Cliente cliente);
+	
+	@Query("SELECT v FROM Venta v WHERE YEAR(v.fecha) = ?1 AND MONTH(v.fecha) = ?2")
+    List<Venta> findByMonthAndYear(int year, int month);
+	
 }

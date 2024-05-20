@@ -113,7 +113,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="precio">Precio:</label>
-                        <input type="text" class="form-control" id="precio" name="precio" th:field="*{precio}" placeholder="Ingrese el precio del producto">
+                        <input type="number" class="form-control" id="precio" name="precio" min="0" th:field="*{precio}" placeholder="Ingrese el precio del producto">
                     </div>
                     <div class="mb-3">
                         <label for="imagen">Imagen (URL):</label>

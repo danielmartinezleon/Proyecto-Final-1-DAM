@@ -26,7 +26,7 @@
                             <td th:text="${pedido.fecha}"></td>
                             <td th:text="${#numbers.formatDecimal(pedido.importeTotal, 0, 2)} + '€'"></td>
                             <td>
-                                <a th:href="@{/user/pedidos/{id}(id=${pedido.id})}" class="btn btn-primary">Ver detalles</a>
+                                <a th:href="@{/user/pedidos/{id}(id=${pedido.id})}" class="btn btn-primary"><i class="bi bi-search"></i></a>
                             </td>
                         </tr>
                     </tbody>

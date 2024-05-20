@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 
@@ -32,7 +30,7 @@ public class ProductoController {
         return "melee";
     }
     
-    @RequestMapping("/producto/{id}")
+    @GetMapping("/producto/{id}")
     public String cargarProducto(@PathVariable("id") Long id, Model model) {
         Optional<Producto> optionalProducto = productoService.findById(id);
         Producto producto = optionalProducto.get();

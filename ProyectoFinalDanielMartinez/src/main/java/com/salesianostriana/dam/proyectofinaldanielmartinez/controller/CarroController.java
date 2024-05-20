@@ -4,9 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -15,7 +13,6 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.model.LineaVenta;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ClienteService;
-import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.VentaService;
 
 
@@ -30,9 +27,6 @@ public class CarroController {
 
 	@Autowired
 	private VentaService ventaService;
-	
-	@Autowired
-	private ProductoService productoService;
 	
 	@Autowired
 	private ClienteService clienteService;

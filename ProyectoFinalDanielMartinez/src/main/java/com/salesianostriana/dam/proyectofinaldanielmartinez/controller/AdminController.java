@@ -18,8 +18,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Admin;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Producto;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.AdminService;
 import com.salesianostriana.dam.proyectofinaldanielmartinez.service.ProductoService;
+import com.salesianostriana.dam.proyectofinaldanielmartinez.service.VentaService;
 
 import org.springframework.ui.Model;
 
@@ -31,6 +33,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private VentaService ventaService;
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
@@ -359,7 +364,7 @@ public class AdminController {
 
     @PostMapping("/admin/productos/otros/eliminarProducto/{id}")
     public String eliminarOtros(@PathVariable("id") Long id) {
-        productoService.deleteById(id);
+        productoService.borrarProducto(id);
         return "redirect:/admin/productos/otros";
     }
     
@@ -378,5 +383,26 @@ public class AdminController {
         auth = new UsernamePasswordAuthenticationToken(updatedAdmin, auth.getCredentials(), auth.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
         return "redirect:/admin/profile";
+    }
+    
+    @GetMapping("/admin/ventas")
+    public String getVentas(Model model) {
+        List<Venta> ventas = ventaService.findAll();
+        String mesConMasVentas = adminService.getMesConMasVentas();
+        Producto productoMasVendido = adminService.getProductoMasVendido();
+
+        model.addAttribute("ventas", ventas);
+        model.addAttribute("mesConMasVentas", mesConMasVentas);
+        model.addAttribute("productoMasVendido", productoMasVendido);
+
+        return "admin/ventas";
+    }
+    
+    @GetMapping("/admin/detalleVenta/{id}")
+    public String verDetallesVenta(@PathVariable Long id, Model model) {
+        Venta pedido = ventaService.findById(id)
+                                   .orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado: " + id));
+        model.addAttribute("pedido", pedido);
+        return "admin/detallesVenta";
     }
 }

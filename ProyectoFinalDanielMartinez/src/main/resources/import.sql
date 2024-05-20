@@ -51,6 +51,22 @@ INSERT INTO Producto (descuento, nombre, descripcion, stock, precio, imagen, cat
 INSERT INTO Producto (descuento, nombre, descripcion, stock, precio, imagen, categoria_id) VALUES (false, 'Pechera de Metal de Élite', 'Una pechera de metal de élite, utilizada por los guerreros más valientes y experimentados en las batallas más feroces.', 8, 320.50, 'https://mortisdraco.com/wp-content/uploads/2019/10/200515.jpg', 4);
 
 
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('admin', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Falsa 123', 'ADMIN');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('admin', 'Angel', 'Naranjo', 'angel.naranjo@triana.salesianos.edu', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Falsa 123', 'ADMIN');
 INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('user', 'Luismi', 'Lopez', 'luismi.lopez@triana.salesianos.edu', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 434', 'USER');
-INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('nlm2000', 'Nydia', 'Lopez', 'nydialopez@gmail.com', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Inventada 10', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('anagar', 'Ana', 'García', 'ana.garcia@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Calle Principal 123', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('davidmar', 'David', 'Martínez', 'david.martinez@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Avenida Central 456', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('elenalo', 'Elena', 'López', 'elena.lopez@gmail.com', '{bcrypt}$2a$10$RlcLSXIvm8VDjEBq19oB7OFEB3sJnxvJETStFrBeHwU1pYc0EGTTa', 'Plaza Mayor 789', 'USER');
+INSERT INTO Usuario (username, nombre, apellidos, email, password, direccion, tipo) VALUES ('dml1999', 'Daniel', 'Martinez León', 'danimairena@hotmail.com', '{bcrypt}$2a$10$ujGoDBbum85IdrR8Uloix.x7K0MzX2k5/47Ejig8LzH8S7UFGPSvO', 'Calle Falsa 13', 'USER');
+
+
+INSERT INTO venta (abierta, cliente_id, fecha, gastos_envio, importe_total) VALUES (false, (SELECT id FROM Usuario WHERE username = 'dml1999'), '2024-05-20', 14.99, 422.70);
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (2, 1, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'dml1999') AND abierta = false));
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (1, 2, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'dml1999') AND abierta = false));
+
+INSERT INTO venta (abierta, cliente_id, fecha, gastos_envio, importe_total) VALUES (false, (SELECT id FROM Usuario WHERE username = 'anagar'), '2024-05-20', 0.00, 664.50);
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (3, 3, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'anagar') AND abierta = false));
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (2, 4, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'anagar') AND abierta = false));
+
+INSERT INTO venta (abierta, cliente_id, fecha, gastos_envio, importe_total) VALUES (false, (SELECT id FROM Usuario WHERE username = 'davidmar'), '2024-05-20', 0.00, 522.70);
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (1, 5, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'davidmar') AND abierta = false));
+INSERT INTO linea_venta (cantidad, producto_id, venta_id) VALUES (2, 6, (SELECT id FROM venta WHERE cliente_id = (SELECT id FROM Usuario WHERE username = 'davidmar') AND abierta = false));
