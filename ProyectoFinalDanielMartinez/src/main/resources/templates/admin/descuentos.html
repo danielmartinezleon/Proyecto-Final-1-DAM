@@ -16,7 +16,7 @@
                         </form>                        
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                        <div th:each="producto, iterStat : ${productos}" class="col-md-3">
+                        <div th:each="producto, iterStat : ${productos}" class="col-md-3" data-aos="fade-up">
                             <div class="card my-3 bg-light">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="producto">
                                 <div class="card-body">
@@ -59,5 +59,8 @@
         </div>
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
+    <script>
+        AOS.init();
+      </script>
 </body>
 </html>

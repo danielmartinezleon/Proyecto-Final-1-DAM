@@ -14,7 +14,7 @@
 						</button>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                        <div th:each="producto, iterStat : ${productos}" class="col-md-3">
+                        <div th:each="producto, iterStat : ${productos}" class="col-md-3" data-aos="fade-up">
                             <div class="card my-3 bg-light">
                                 <a th:href="@{/admin/productos/distancia/{id}(id=${producto.id})}">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="producto">
@@ -86,7 +86,9 @@
         </div>
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
-
+    <script>
+        AOS.init();
+      </script>
     <!-- Formulario para agregar producto -->
     <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

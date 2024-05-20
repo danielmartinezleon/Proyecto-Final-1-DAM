@@ -9,7 +9,7 @@
                 <div class="col-md-9">
                     <h3 class="mt-5 text-center">ARMADURAS DE CUERO</h3>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
-                        <div th:each="producto : ${productos}" class="col-md-3">
+                        <div th:each="producto : ${productos}" class="col-md-3" data-aos="fade-up">
                             <div class="card my-3 bg-light bg-light">
                                 <a th:href="${'/producto/'+producto.id}">
                                     <img th:src="@{${producto.imagen}}" class="card-img-top img-fluid" alt="producto">
@@ -50,13 +50,6 @@
     <footer th:replace="~{fragments/footer::pie}"></footer>
 </body>
 <script>
-    let rango = document.getElementById('rango');
-    let valorSpan = document.getElementById('valor_rango');
-
-    function actualizarValor() {
-        valorSpan.textContent = rango.value;
-    }
-    rango.addEventListener('input', actualizarValor);
-    actualizarValor();
-</script>
+    AOS.init();
+  </script>
 </html>
