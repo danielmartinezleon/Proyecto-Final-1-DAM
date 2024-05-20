@@ -82,8 +82,8 @@ public class AdminController {
     
     @RequestMapping("/admin/productos/melee/{id}")
     public String cargarProductoMelee(@PathVariable("id") Long id, Model model) {
-        Optional<Producto> optionalProducto = productoService.findById(id);
-            Producto producto = optionalProducto.get();
+    	Producto producto = productoService.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
             System.out.println(producto);
             model.addAttribute("producto", producto);
             return "/admin/productoadmin";
@@ -91,8 +91,8 @@ public class AdminController {
     
     @RequestMapping("/admin/productos/distancia/{id}")
     public String cargarProductoDistancia(@PathVariable("id") Long id, Model model) {
-        Optional<Producto> optionalProducto = productoService.findById(id);
-        Producto producto = optionalProducto.get();
+    	Producto producto = productoService.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
         System.out.println(producto);
         model.addAttribute("producto", producto);
         return "/admin/productoadmin";
@@ -144,21 +144,21 @@ public class AdminController {
     }
     
     
-    @GetMapping("/admin/productos/melee/editar/{id}")
+    @GetMapping("/admin/productos/editar/{id}")
 	public String mostrarFormularioMelee(@PathVariable("id") long id, Model model) {
-		Optional<Producto> prod = productoService.findById(id);
-		
-		Producto editar = prod.get();
+    	Producto editar = productoService.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+		editar.setId(editar.getId());
 		model.addAttribute("productoEdit", editar);
 		
-		return "/admin/editmelee";
+		return "/admin/formularioprod";
 		
 	}
     
-    @PostMapping("/admin/productos/melee/editar/submit")
+    @PostMapping("/admin/productos/editar/submit")
     public String procesarMelee(@ModelAttribute("productoEdit") Producto p) {
     	productoService.edit(p);
-    	return "redirect:/admin/productos/melee";
+    	return "redirect:/admin";
     }
 
     @PostMapping("/admin/productos/distancia/guardarProducto")
@@ -174,23 +174,6 @@ public class AdminController {
         return "redirect:/admin/productos/distancia";
     }
     
-    
-    @GetMapping("/admin/productos/distancia/editar/{id}")
-	public String mostrarFormularioDistancia(@PathVariable("id") long id, Model model) {
-		Optional<Producto> prod = productoService.findById(id);
-		
-		Producto editar = prod.get();
-		model.addAttribute("productoEdit", editar);
-		
-		return "/admin/editdistancia";
-		
-	}
-    
-    @PostMapping("/admin/productos/distancia/editar/submit")
-    public String procesarDistancia(@ModelAttribute("productoEdit") Producto p) {
-    	productoService.edit(p);
-    	return "redirect:/admin/productos/distancia";
-    }
     
     @GetMapping("/admin/productos/cuero")
     public String listarCueroAdmin(Model model, @RequestParam(name = "orden", required = false) String orden) {
@@ -223,8 +206,8 @@ public class AdminController {
 
     @RequestMapping("/admin/productos/cuero/{id}")
     public String cargarProductoCuero(@PathVariable("id") Long id, Model model) {
-        Optional<Producto> optionalProducto = productoService.findById(id);
-            Producto producto = optionalProducto.get();
+    	Producto producto = productoService.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
             System.out.println(producto);
             model.addAttribute("producto", producto);
             return "/admin/productoadmin";
@@ -240,23 +223,6 @@ public class AdminController {
     public String eliminarCuero(@PathVariable("id") Long id) {
         productoService.deleteById(id);
         return "redirect:/admin/productos/cuero";
-    }
-
-    @GetMapping("/admin/productos/cuero/editar/{id}")
-	public String mostrarFormularioCuero(@PathVariable("id") long id, Model model) {
-		Optional<Producto> prod = productoService.findById(id);
-		
-		Producto editar = prod.get();
-		model.addAttribute("productoEdit", editar);
-		
-		return "/admin/editcuero";
-		
-	}
-    
-    @PostMapping("/admin/productos/cuero/editar/submit")
-    public String procesarCuero(@ModelAttribute("productoEdit") Producto p) {
-    	productoService.edit(p);
-    	return "redirect:/admin/productos/cuero";
     }
     
     @GetMapping("/admin/productos/metal")
@@ -309,36 +275,42 @@ public class AdminController {
         return "redirect:/admin/productos/metal";
     }
 
-    @GetMapping("/admin/productos/metal/editar/{id}")
-	public String mostrarFormularioMetal(@PathVariable("id") long id, Model model) {
-		Optional<Producto> prod = productoService.findById(id);
-		
-		Producto editar = prod.get();
-		model.addAttribute("productoEdit", editar);
-		
-		return "/admin/editmetal";
-		
-	}
     
     @GetMapping("/admin/descuento")
     public String abrirDescuentos(Model model, @RequestParam(name = "orden", required = false) String orden) {
     	List<Producto> productos = productoService.findAll();
     	model.addAttribute("productos", productos);
     	
-    	return "/admin/descuento";
+    	return "/admin/descuentos";
     }
     
     @GetMapping("/admin/descuento/{id}")
-    public String formDescuento(@PathVariable("id") long id, Model model) {
-    	Optional<Producto> prod = productoService.findById(id);
-    	
-    	return "";
+    public String formDescuento(@PathVariable("id") long id, @RequestParam(value = "cant", required = false, defaultValue = "0") double cant, Model model) {
+        Optional<Producto> prod = productoService.findById(id);
+        if (prod.isPresent()) {
+            Producto producto = prod.get();
+            if (cant > 0) {
+                adminService.aplicarDescuento(id, cant);
+                producto = productoService.findById(id).get();
+            }
+            model.addAttribute("productoEdit", producto);
+            return "/admin/descueentoproduc";
+        } else {
+            model.addAttribute("error", "Producto no encontrado");
+            return "error";
+        }
     }
     
-    @PostMapping("/admin/productos/metal/editar/submit")
-    public String procesarMetal(@ModelAttribute("productoEdit") Producto p) {
-    	productoService.edit(p);
-    	return "redirect:/admin/productos/metal";
+    @PostMapping("/admin/descuento/submit")
+    public String aplicarDescuento(@RequestParam("id") Long id, @RequestParam("cant") double cant) {
+        adminService.aplicarDescuento(id, cant);
+        return "redirect:/admin/descuento";
+    }
+
+    @PostMapping("/admin/liquidacion")
+    public String ponerLiquidacion() {
+    	adminService.ponerLiquidacion();
+    	return "redirect:/admin/descuento";
     }
     
     @GetMapping("/admin/productos/otros")
@@ -390,24 +362,7 @@ public class AdminController {
         productoService.deleteById(id);
         return "redirect:/admin/productos/otros";
     }
-
-    @GetMapping("/admin/productos/otros/editar/{id}")
-	public String mostrarFormularioOtros(@PathVariable("id") long id, Model model) {
-		Optional<Producto> prod = productoService.findById(id);
-		
-		Producto editar = prod.get();
-		model.addAttribute("productoEdit", editar);
-		
-		return "/admin/editotros";
-		
-	}
     
-    @PostMapping("/admin/productos/otros/editar/submit")
-    public String procesarOtros(@ModelAttribute("productoEdit") Producto p) {
-    	productoService.edit(p);
-    	return "redirect:/admin/productos/otros";
-    }
-
     
     @GetMapping("/admin/profile")
     public String adminProfile(Model model, @AuthenticationPrincipal Admin admin) {

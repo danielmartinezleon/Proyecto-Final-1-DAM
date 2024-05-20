@@ -14,7 +14,7 @@
                     <p th:text="${producto.descripcion}">Epic Armoury’s Aether Dao 100 cm es un arma híbrida de látex inspirada en el «General de Armas», una espada curva tradicional en la cultura china...</p>
                     <form th:action="@{/user/agregar/{id}(id=${producto.id})}" method="get">
                         <div class="mb-3">
-                            <label for="cantidad">Cantidad:</label>
+                            <label th:field="*{cantidad}" for="cantidad">Cantidad:</label>
 							<input type="number" id="cantidad" name="cantidad" value="1" min="1" class="form-control">
                         </div>
                         <h2 th:text="'PRECIO: ' + ${#numbers.formatDecimal(producto.precio, 001, 2)} + '€'">100€</h2>

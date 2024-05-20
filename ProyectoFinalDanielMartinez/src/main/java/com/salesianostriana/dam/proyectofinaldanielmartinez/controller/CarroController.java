@@ -39,10 +39,10 @@ public class CarroController {
 	
 	
 	@GetMapping("/user/agregar/{id}")
-    public String agregarAlCarrito(@AuthenticationPrincipal Cliente logeado, @PathVariable Long id) {
+    public String agregarAlCarrito(@AuthenticationPrincipal Cliente logeado, @PathVariable Long id, int cantidad) {
         Cliente cliente = clienteService.obtenerClienteActual(logeado);
         if (cliente != null) {
-            ventaService.agregarProductoAlCarrito(cliente, id);
+            ventaService.agregarProductoAlCarrito(cliente, id, cantidad);
         }
         return "redirect:/user/carro";
     }

@@ -31,7 +31,7 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
         return ventaRepository.buscarClienteYCerrada(cliente);
     }
 
-    public void agregarProductoAlCarrito(Cliente cliente, Long productoId) {
+    public void agregarProductoAlCarrito(Cliente cliente, Long productoId, int cantidad) {
         Venta venta = obtenerCarritoDelCliente(cliente);
         Producto producto = productoService.findById(productoId)
                 .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
@@ -42,11 +42,11 @@ public class VentaService extends BaseServiceImpl<Venta, Long, VentaRepository> 
 
         if (lineaVentaOpt.isPresent()) {
             LineaVenta lineaVenta = lineaVentaOpt.get();
-            lineaVenta.setCantidad(lineaVenta.getCantidad() + 1);
+            lineaVenta.setCantidad(lineaVenta.getCantidad() + cantidad);
         } else {
             LineaVenta nuevaLinea = new LineaVenta();
             nuevaLinea.setProducto(producto);
-            nuevaLinea.setCantidad(1);
+            nuevaLinea.setCantidad(cantidad);
             nuevaLinea.setVenta(venta);
             venta.addLineaVenta(nuevaLinea);
         }

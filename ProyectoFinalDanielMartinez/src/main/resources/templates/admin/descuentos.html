@@ -9,9 +9,11 @@
                 <div class="col-md-9">
                     <h3 class="mt-5 text-center">DESCUENTOS</h3>
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary">
-                            <i class="bi bi-bag-plus-fill"></i> Poner en Liquidación
-                        </button>
+                        <form th:action="@{/admin/liquidacion}" method="post">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-bag-plus-fill"></i> Poner / Quitar de Liquidación
+                            </button>
+                        </form>                        
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
                         <div th:each="producto, iterStat : ${productos}" class="col-md-3">
@@ -21,9 +23,9 @@
                                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                                     <p class="precio" th:text="${#numbers.formatDecimal(producto.precio, 0, 2)} + '€'"></p>
                                     <div class="btn-group" role="group">
-                                        <a th:href="@{/admin/productos/distancia/descuento/{id}(id=${producto.id})}">
+                                        <a th:href="@{/admin/descuento/{id}(id=${producto.id})}">
                                             <button type="button" class="btn btn-success">
-                                                &emsp;<i class="bi bi-percent"></i>&emsp; Aplicar Descuento
+                                                <i class="bi bi-percent"></i>Aplicar Descuento<i class="bi bi-percent"></i>
                                             </button>
                                         </a>
                                     </div>
