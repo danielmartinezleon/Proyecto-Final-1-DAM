@@ -10,22 +10,12 @@ import com.salesianostriana.dam.proyectofinaldanielmartinez.model.Venta;
 
 public interface VentaRepository extends JpaRepository<Venta, Long>{
 	
-	@Query("select count(l) from LineaVenta l where l.venta = ?1")
-	int contarLineasVenta(Venta venta);
 	
-	@Query("select v from Venta v where v.abierta = true")
-	List<Venta> buscarVentasAbiertas();
-	
-	@Query("select v from Venta v where v.abierta = false")
-	List<Venta> buscarVentasCerradas();
-
 	@Query("select v from Venta v where v.cliente = ?1 and v.abierta = false")
 	List<Venta> buscarClienteYCerrada(Cliente cliente);
 	
 	@Query("SELECT v FROM Venta v WHERE v.cliente = :cliente AND v.abierta = true")
     List<Venta> buscarVentasAbiertasPorCliente(Cliente cliente);
-	
-	List<Venta> findByClienteAndAbiertaTrue(Cliente cliente);
 	
 	@Query("SELECT v FROM Venta v WHERE YEAR(v.fecha) = ?1 AND MONTH(v.fecha) = ?2")
     List<Venta> findByMonthAndYear(int year, int month);

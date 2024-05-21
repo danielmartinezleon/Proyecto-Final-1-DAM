@@ -87,8 +87,8 @@ public class AdminController {
     
     @RequestMapping("/admin/productos/melee/{id}")
     public String cargarProductoMelee(@PathVariable("id") Long id, Model model) {
-    	Producto producto = productoService.findById(id)
-	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+    	Optional<Producto> optionalProducto = productoService.findById(id);
+        Producto producto = optionalProducto.get();
             System.out.println(producto);
             model.addAttribute("producto", producto);
             return "/admin/productoadmin";
@@ -96,8 +96,8 @@ public class AdminController {
     
     @RequestMapping("/admin/productos/distancia/{id}")
     public String cargarProductoDistancia(@PathVariable("id") Long id, Model model) {
-    	Producto producto = productoService.findById(id)
-	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+    	Optional<Producto> optionalProducto = productoService.findById(id);
+        Producto producto = optionalProducto.get();        
         System.out.println(producto);
         model.addAttribute("producto", producto);
         return "/admin/productoadmin";
@@ -144,15 +144,15 @@ public class AdminController {
    
     @PostMapping("/admin/productos/melee/eliminarProducto/{id}")
     public String eliminarMelee(@PathVariable("id") Long id) {
-        productoService.deleteById(id);
+        productoService.borrarProducto(id);
         return "redirect:/admin/productos/melee";
     }
     
     
     @GetMapping("/admin/productos/editar/{id}")
 	public String mostrarFormularioMelee(@PathVariable("id") long id, Model model) {
-    	Producto editar = productoService.findById(id)
-	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+    	Optional<Producto> optionalProducto = productoService.findById(id);
+        Producto editar = optionalProducto.get();
 		editar.setId(editar.getId());
 		model.addAttribute("productoEdit", editar);
 		
@@ -175,7 +175,7 @@ public class AdminController {
    
     @PostMapping("/admin/productos/distancia/eliminarProducto/{id}")
     public String eliminarDistancia(@PathVariable("id") Long id) {
-        productoService.deleteById(id);
+        productoService.borrarProducto(id);
         return "redirect:/admin/productos/distancia";
     }
     
@@ -211,8 +211,8 @@ public class AdminController {
 
     @RequestMapping("/admin/productos/cuero/{id}")
     public String cargarProductoCuero(@PathVariable("id") Long id, Model model) {
-    	Producto producto = productoService.findById(id)
-	            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+    	Optional<Producto> optionalProducto = productoService.findById(id);
+        Producto producto = optionalProducto.get();
             System.out.println(producto);
             model.addAttribute("producto", producto);
             return "/admin/productoadmin";
@@ -226,7 +226,7 @@ public class AdminController {
 
     @PostMapping("/admin/productos/cuero/eliminarProducto/{id}")
     public String eliminarCuero(@PathVariable("id") Long id) {
-        productoService.deleteById(id);
+        productoService.borrarProducto(id);
         return "redirect:/admin/productos/cuero";
     }
     
@@ -276,7 +276,7 @@ public class AdminController {
 
     @PostMapping("/admin/productos/metal/eliminarProducto/{id}")
     public String eliminarMetal(@PathVariable("id") Long id) {
-        productoService.deleteById(id);
+        productoService.borrarProducto(id);
         return "redirect:/admin/productos/metal";
     }
 

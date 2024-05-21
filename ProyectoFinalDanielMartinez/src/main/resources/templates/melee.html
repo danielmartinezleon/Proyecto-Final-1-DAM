@@ -17,7 +17,6 @@
                                 <div class="card-body">
                                     <h5 class="card-title" th:text="${producto.nombre}"></h5>
                                     <p class="precio" th:text="${#numbers.formatDecimal(producto.precio, 001, 2)} + '€'"></p>
-                                    <button class="btn btn-success">Añadir a mi cesta</button>
                                 </div>
                             </div>
                         </div>

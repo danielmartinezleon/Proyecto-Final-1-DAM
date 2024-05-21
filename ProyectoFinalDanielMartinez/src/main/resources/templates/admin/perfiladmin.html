@@ -17,7 +17,6 @@
                     </aside>
                 </div>
                 <div class="col-md-9">
-                    <!-- Contenido principal: Datos del usuario -->
                     <h2 class="mb-4">Mi cuenta</h2>
                     <div id="userData" th:object="${admin}">
                         <table class="table table-striped">
@@ -83,11 +82,5 @@
     </main>
     <footer th:replace="~{fragments/footer::pie}"></footer>
 </body>
-<script>
-    document.getElementById('editarPerfilBtn').addEventListener('click', function() {
-        // Ocultar datos del usuario y mostrar formulario de edición
-        document.getElementById('userData').style.display = 'none';
-        document.getElementById('editarPerfilForm').style.display = 'block';
-    });
-</script>
+<script src="../../static/js/formularioperfil.js" th:src="@{/js/formularioperfil.js}" defer></script>
 </html>
