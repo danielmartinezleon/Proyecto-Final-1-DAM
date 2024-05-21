@@ -1,8 +1,18 @@
 Proyecto Final 1º DAM Daniel Martínez León
 
+| Usuario | Contraseña |
+| --- | --- |
+| admin | admin |
+| user | 1234 |
+
+| Códigos de descuento |
+| --- |
+| DESCUENTO15 |
+| DESCUENTO30 |
+
 | Prueba | Solución | OK |
 | --- | --- | --- |
-| Acceder a /admin desde usuario | Implementar seguridad en el programa | si |
-| Introducción de números negativos | Poner mínimo 0 | si |
-| Buscar un id inexistente | Implementar seguridad en el programa | si |
-| Acceder a las dierentes partes de la tienda sin estar logueado | Implementar seguridad en el programa | si |
+| Acceder a rutas de admin desde usuario | Implementar seguridad en el programa | Si |
+| Introducción de números negativos | Poner mínimo 0 | Si |
+| Acceder a las dierentes partes de la página sin estar logeado | Hacer vistas sin logear | Si |
+| Borrar producto vinculado a una venta | Excepciones | A medias
