@@ -234,7 +234,14 @@ public class UsuarioController {
             return "/user/productouser";
     }
     
-    
+    @GetMapping("/user/productos/{id}")
+    public String cargarProducto(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/user/productouser";
+    }
 	
 	@GetMapping("/user/profile")
     public String userProfile(Model model, @AuthenticationPrincipal Cliente cliente) {

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -85,7 +84,7 @@ public class AdminController {
         return "/admin/meleeadmin";
     }
     
-    @RequestMapping("/admin/productos/melee/{id}")
+    @GetMapping("/admin/productos/melee/{id}")
     public String cargarProductoMelee(@PathVariable("id") Long id, Model model) {
     	Optional<Producto> optionalProducto = productoService.findById(id);
         Producto producto = optionalProducto.get();
@@ -94,7 +93,7 @@ public class AdminController {
             return "/admin/productoadmin";
     }
     
-    @RequestMapping("/admin/productos/distancia/{id}")
+    @GetMapping("/admin/productos/distancia/{id}")
     public String cargarProductoDistancia(@PathVariable("id") Long id, Model model) {
     	Optional<Producto> optionalProducto = productoService.findById(id);
         Producto producto = optionalProducto.get();        
@@ -209,7 +208,7 @@ public class AdminController {
         return "/admin/cueroadmin";
     }
 
-    @RequestMapping("/admin/productos/cuero/{id}")
+    @GetMapping("/admin/productos/cuero/{id}")
     public String cargarProductoCuero(@PathVariable("id") Long id, Model model) {
     	Optional<Producto> optionalProducto = productoService.findById(id);
         Producto producto = optionalProducto.get();
@@ -259,8 +258,17 @@ public class AdminController {
         return "/admin/metaladmin";
     }
 
-    @RequestMapping("/admin/productos/metal/{id}")
+    @GetMapping("/admin/productos/metal/{id}")
     public String cargarProductoMetal(@PathVariable("id") Long id, Model model) {
+        Optional<Producto> optionalProducto = productoService.findById(id);
+            Producto producto = optionalProducto.get();
+            System.out.println(producto);
+            model.addAttribute("producto", producto);
+            return "/admin/productoadmin";
+    }
+    
+    @GetMapping("/admin/productos/{id}")
+    public String cargarProducto(@PathVariable("id") Long id, Model model) {
         Optional<Producto> optionalProducto = productoService.findById(id);
             Producto producto = optionalProducto.get();
             System.out.println(producto);
@@ -347,7 +355,7 @@ public class AdminController {
         return "/admin/otrosadmin";
     }
 
-    @RequestMapping("/admin/productos/otros/{id}")
+    @GetMapping("/admin/productos/otros/{id}")
     public String cargarProductoOtros(@PathVariable("id") Long id, Model model) {
         Optional<Producto> optionalProducto = productoService.findById(id);
             Producto producto = optionalProducto.get();
